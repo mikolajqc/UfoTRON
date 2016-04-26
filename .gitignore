@@ -3,7 +3,8 @@
 
 ### NetBeans ###
 nbproject/private/
-build/
+build/classes/*/*.class
+build/classes/.*
 nbbuild/
 dist/
 nbdist/
