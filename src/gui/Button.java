@@ -6,6 +6,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Input;
+import ufotron.*;
 
 public class Button
 {
@@ -32,8 +33,14 @@ public class Button
 	
 	public void Update(Input input)
 	{
-		if(input.isMousePressed(0) && Mouse.getX() > position.x && Mouse.getX() < position.x + size.x && Mouse.getY() > position.y && Mouse.getY() < position.y + size.y)
-			function.accept(null);
+		if(Mouse.getX() > position.x && Mouse.getX() < position.x + size.x && UfoTron.GetHeight() - Mouse.getY() > position.y && UfoTron.GetHeight() - Mouse.getY() < position.y + size.y)
+		{
+			if(input.isMousePressed(0))
+			{
+				System.out.println(Mouse.getX() + " " + Mouse.getY());
+				function.accept(null);
+			}
+		}
 	}
 	
 	public void Render()
