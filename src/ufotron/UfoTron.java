@@ -42,6 +42,8 @@ public class UfoTron extends BasicGame
     @Override
     public void update(GameContainer container, int delta) throws SlickException
     {
+		Timer.updateTime();
+		
 		for(int i = 0; i < players.size(); ++i)
 			players.get(i).Update(container.getInput());
 		

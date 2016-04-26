@@ -24,7 +24,7 @@ public class Player
 			
 			position = new Vector2f(320,240);
 			size = new Vector2f(30, 30);
-			velocity = new Vector2f(0.1F,0);
+			velocity = new Vector2f(290.0F,0);
 			sprite = new Image("crate.png");
 		}
 		catch(SlickException e)
@@ -36,7 +36,10 @@ public class Player
 	public void Update(Input input)
 	{
 		if(position.x < 0 || position.x + size.x > UfoTron.getWidth() || position.y < 0 || position.y + size.y > UfoTron.getHeight())
+		{
+			System.out.println(Timer.getTotalTime());
 			UfoTron.getPlayers().remove(this);
+		}
 		
 		if(input.isKeyPressed(Input.KEY_RIGHT))
 		{
@@ -47,8 +50,8 @@ public class Player
 			velocity = new Vector2f(velocity.y, -velocity.x);
 		}
 		
-		position.x += velocity.x;
-		position.y += velocity.y;
+		position.x += velocity.x * Timer.getDeltaTime();
+		position.y += velocity.y * Timer.getDeltaTime();
 	}
 	
 	public void Render()
