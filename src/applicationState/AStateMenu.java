@@ -1,36 +1,27 @@
 package applicationState;
 
-import org.lwjgl.input.Mouse;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
 import ufotron.*;
+import gui.*;
+import org.lwjgl.util.vector.Vector2f;
 
 public class AStateMenu extends ApplicationState
 {
-	Image playButton;
+	private Button button;
 	
 	public void Init()
 	{
 		System.out.println("Menu");
-		try
-		{
-			playButton = new Image("button.png");
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
+		button = new Button("button.png", new Vector2f(270, 190), new Vector2f(100, 100), Void -> { UfoTron.SetCurrentState(new AStateGame());});
 	}
 	
 	public void Update(Input input)
 	{		
-		if(input.isMousePressed(0) && Mouse.getX() > 270 && Mouse.getX() < 370 && Mouse.getY() > 190 && Mouse.getY() < 290)
-			UfoTron.SetCurrentState(new AStateGame());
+		button.Update(input);
 	}
 	
 	public void Render()
 	{
-		playButton.draw(270, 190, 100, 100);
+		button.Render();
 	}
 }
