@@ -7,12 +7,15 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import applicationState.*;
+
 public class UfoTron extends BasicGame
 {
 	private static int width = 640;
 	private static int height = 480;
 	private static boolean isFullscreen = false;
-	private static ArrayList<Player> players = new ArrayList<Player>();
+	
+	static ApplicationState currentState = null;
 	
     public UfoTron()
     {
@@ -36,7 +39,7 @@ public class UfoTron extends BasicGame
     @Override
     public void init(GameContainer container) throws SlickException
     {
-		players.add(new Player(0));
+		currentState = new AStateMenu();
     }
  
     @Override
@@ -44,19 +47,17 @@ public class UfoTron extends BasicGame
     {
 		Timer.updateTime();
 		
-		for(int i = 0; i < players.size(); ++i)
-			players.get(i).Update(container.getInput());
-		
+		currentState.Update(container.getInput());
     }
  
 	@Override
     public void render(GameContainer container, Graphics g) throws SlickException
     {
-		for(int i = 0; i < players.size(); ++i)
-			players.get(i).Render();
+		currentState.Render();
     }
 	
-	public static int getHeight() {return height;}
-	public static int getWidth() {return width;}
-	public static ArrayList<Player> getPlayers() {return players;}
+	public static int GetHeight() {return height;}
+	public static int GetWidth() {return width;}
+	
+	public static void SetCurrentState(ApplicationState newState) { currentState = newState; }
 }

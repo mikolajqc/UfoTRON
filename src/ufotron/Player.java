@@ -1,5 +1,7 @@
 package ufotron;
 
+import applicationState.AStateGame;
+import applicationState.AStateMenu;
 import java.sql.Time;
 import org.lwjgl.util.vector.Vector;
 import org.lwjgl.util.vector.Vector2f;
@@ -35,10 +37,11 @@ public class Player
 	
 	public void Update(Input input)
 	{
-		if(position.x < 0 || position.x + size.x > UfoTron.getWidth() || position.y < 0 || position.y + size.y > UfoTron.getHeight())
+		if(position.x < 0 || position.x + size.x > UfoTron.GetWidth() || position.y < 0 || position.y + size.y > UfoTron.GetHeight())
 		{
 			System.out.println(Timer.getTotalTime());
-			UfoTron.getPlayers().remove(this);
+			AStateGame.GetPlayers().remove(this);
+			UfoTron.SetCurrentState(new AStateMenu());
 		}
 		
 		if(input.isKeyPressed(Input.KEY_RIGHT))

@@ -14,7 +14,6 @@ public class Timer
 		deltaTime = ((double)(Duration.between(lastFrameTime, newFrameTime).toNanos())/1000000000.0);
 		totalTime += deltaTime;
 		lastFrameTime = newFrameTime;
-		//System.out.println(totalTime);
 	}
 	
 	public static double getDeltaTime() {return deltaTime;}
