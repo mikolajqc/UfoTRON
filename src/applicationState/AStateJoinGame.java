@@ -1,15 +1,11 @@
 package applicationState;
 
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.newdawn.slick.Input;
 
 import ufotron.*;
@@ -17,7 +13,9 @@ import ufotron.*;
 public class AStateJoinGame extends ApplicationState
 {
 	public static final int PORT=50007;
-	public static final String HOST = "192.168.0.108";
+
+	public static final String HOST = "192.168.0.103";
+
 	
 	@Override
 	public void Init()

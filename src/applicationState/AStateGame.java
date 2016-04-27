@@ -1,6 +1,5 @@
 package applicationState;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import org.newdawn.slick.Input;
 import ufotron.Player;
@@ -18,6 +17,8 @@ public class AStateGame extends ApplicationState
 	@Override
 	public void Init()
 	{	
+		players.clear();
+		
 		numberOfPlayers = 4;
 		myPlayer = 0; //TODO: Get this information via server connection
 		
@@ -42,7 +43,7 @@ public class AStateGame extends ApplicationState
 	@Override
 	public void Update(Input input)
 	{
-		if(players.size() == 0)
+		if(players.isEmpty())
 			UfoTron.SetCurrentState(new AStateMenu());
 		
 		for(Integer currentEvent = eventQueue.poll(); currentEvent != null; currentEvent = eventQueue.poll())
