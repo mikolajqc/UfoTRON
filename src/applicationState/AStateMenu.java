@@ -3,11 +3,7 @@ package applicationState;
 import org.newdawn.slick.Input;
 import ufotron.*;
 import gui.*;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import org.lwjgl.util.vector.Vector2f;
 
 public class AStateMenu extends ApplicationState
