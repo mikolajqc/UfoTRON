@@ -53,6 +53,8 @@ public class UfoTron extends BasicGame
     {
 		currentState = new AStateMenu();
 		container.getInput().addKeyListener(new KeyboardInput());
+		container.setVSync(true);
+		container.setTargetFrameRate(60);
     }
  
     @Override
