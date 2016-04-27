@@ -8,12 +8,25 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import applicationState.*;
+//import connection.*;
+
+import java.io.*;
+import java.net.*;
 
 public class UfoTron extends BasicGame
 {
 	private static int width = 640;
 	private static int height = 480;
 	private static boolean isFullscreen = false;
+
+///Server
+	private static ServerSocket serverSocket = null;
+	private static Socket socket = null;
+	//public static BufferedInputStream inputBuffer = null;
+	//public static BufferedOutputStream outputBuffer = null;
+	private static DataInputStream inputBuffer = null;
+	private static DataOutputStream outputBuffer = null;
+	
 	
 	static ApplicationState currentState = null;
 	
@@ -60,4 +73,22 @@ public class UfoTron extends BasicGame
 	public static int GetWidth() {return width;}
 	
 	public static void SetCurrentState(ApplicationState newState) { currentState = newState; }
+	
+	
+	public static ServerSocket GetServerSocket() {return serverSocket;}
+	public static Socket GetSocket() {return socket;}
+	public static DataInputStream GetInputBuffer() {return inputBuffer;}
+	public static DataOutputStream GetOutputBuffer() {return outputBuffer;}
+	
+	public static void SetServerSocket(ServerSocket source){serverSocket = source;}
+	public static void SetSocket(Socket source) {socket = source;}
+	public static void SetInputBuffer(DataInputStream source) {inputBuffer = source;}
+	public static void SetOutputBuffer(DataOutputStream source) {outputBuffer = source;}
+	
+	public static int Read() throws IOException {
+		
+		if(inputBuffer.available() != 0) return inputBuffer.read();
+		else return -1;
+	}
+	public static void Write(int data) throws IOException {outputBuffer.write(data);};
 }

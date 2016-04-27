@@ -1,8 +1,10 @@
 package applicationState;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import org.newdawn.slick.Input;
 import ufotron.Player;
+import ufotron.UfoTron;
 
 public class AStateGame extends ApplicationState
 {
@@ -31,5 +33,6 @@ public class AStateGame extends ApplicationState
 	}
 	
 	public static ArrayList<Player> GetPlayers() {return players;}
+	
 	
 }

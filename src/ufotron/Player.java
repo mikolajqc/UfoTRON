@@ -2,6 +2,9 @@ package ufotron;
 
 import applicationState.AStateGame;
 import applicationState.AStateMenu;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -35,6 +38,17 @@ public class Player
 	
 	public void Update(Input input)
 	{
+
+		/*	try
+			{
+				System.out.println("Receive: " + UfoTron.GetInputBuffer().read());
+			}
+			catch(IOException e)
+			{
+				System.out.println("Sth Wrong with read()");
+			}*/
+
+		
 		if(position.x < 0 || position.x + size.x > UfoTron.GetWidth() || position.y < 0 || position.y + size.y > UfoTron.GetHeight())
 		{
 			System.out.println(Timer.getTotalTime());
@@ -44,12 +58,35 @@ public class Player
 		
 		if(input.isKeyPressed(Input.KEY_RIGHT))
 		{
-			velocity = new Vector2f(-velocity.y, velocity.x);
+
+			
+				velocity = new Vector2f(-velocity.y, velocity.x);
+				
+			try
+			{
+				UfoTron.Write(2);
+			}
+			catch (IOException ex)
+			{
+				System.out.println("Niezapisano");
+			}
+			
 		}
 		else if(input.isKeyPressed(Input.KEY_LEFT))
 		{
 			velocity = new Vector2f(velocity.y, -velocity.x);
+			
+			try
+			{
+				UfoTron.Write(1);
+			}
+			catch (IOException ex)
+			{
+				System.out.println("Niezapisano");
+			}
 		}
+		
+		
 		
 		position.x += velocity.x * Timer.getDeltaTime();
 		position.y += velocity.y * Timer.getDeltaTime();
