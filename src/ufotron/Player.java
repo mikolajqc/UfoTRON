@@ -15,15 +15,15 @@ public class Player
 	
 	Image sprite;
 	
-	public Player(int playerID)
+	public Player(int playerID, Vector2f position, Vector2f size, Vector2f velocity)
 	{
 		try
 		{
 			this.playerID = playerID;
 			
-			position = new Vector2f(320,240);
-			size = new Vector2f(30, 30);
-			velocity = new Vector2f(0,-100);
+			this.position = position;//new Vector2f(320,240);
+			this.size = size;//new Vector2f(30, 30);
+			this.velocity = velocity;//new Vector2f(0,-100);
 			sprite = new Image("crate.png");
 		}
 		catch(SlickException e)
