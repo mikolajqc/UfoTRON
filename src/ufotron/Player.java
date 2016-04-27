@@ -3,8 +3,6 @@ package ufotron;
 import applicationState.AStateGame;
 import applicationState.AStateMenu;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -19,15 +17,15 @@ public class Player
 	
 	Image sprite;
 	
-	public Player(int playerID)
+	public Player(int playerID, Vector2f position, Vector2f size, Vector2f velocity)
 	{
 		try
 		{
 			this.playerID = playerID;
 			
-			position = new Vector2f(320,240);
-			size = new Vector2f(30, 30);
-			velocity = new Vector2f(290.0F,0);
+			this.position = position;//new Vector2f(320,240);
+			this.size = size;//new Vector2f(30, 30);
+			this.velocity = velocity;//new Vector2f(0,-100);
 			sprite = new Image("crate.png");
 		}
 		catch(SlickException e)
@@ -50,43 +48,8 @@ public class Player
 
 		
 		if(position.x < 0 || position.x + size.x > UfoTron.GetWidth() || position.y < 0 || position.y + size.y > UfoTron.GetHeight())
-		{
-			System.out.println(Timer.getTotalTime());
 			AStateGame.GetPlayers().remove(this);
-			UfoTron.SetCurrentState(new AStateMenu());
-		}
-		
-		if(input.isKeyPressed(Input.KEY_RIGHT))
-		{
 
-			
-				velocity = new Vector2f(-velocity.y, velocity.x);
-				
-			try
-			{
-				UfoTron.Write(2);
-			}
-			catch (IOException ex)
-			{
-				System.out.println("Niezapisano");
-			}
-			
-		}
-		else if(input.isKeyPressed(Input.KEY_LEFT))
-		{
-			velocity = new Vector2f(velocity.y, -velocity.x);
-			
-			try
-			{
-				UfoTron.Write(1);
-			}
-			catch (IOException ex)
-			{
-				System.out.println("Niezapisano");
-			}
-		}
-		
-		
 		
 		position.x += velocity.x * Timer.getDeltaTime();
 		position.y += velocity.y * Timer.getDeltaTime();
@@ -96,4 +59,22 @@ public class Player
 	{
 		sprite.draw(position.x, position.y, size.x, size.y);
 	}
+	
+	public void TurnLeft()
+	{
+		velocity = new Vector2f(velocity.y, -velocity.x);
+		sprite.setCenterOfRotation(size.x/2, size.y/2);
+		sprite.rotate(-90);
+	}
+	
+	public void TurnRight()
+	{
+		velocity = new Vector2f(-velocity.y, velocity.x);
+		sprite.setCenterOfRotation(size.x/2, size.y/2);
+		sprite.rotate(90);
+	}
+	
+	public int GetPlayerID() {return playerID;}
+	public Vector2f GetPosition() {return position;}
+	public Vector2f GetVelocity() {return velocity;}	
 }

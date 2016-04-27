@@ -1,6 +1,5 @@
 package ufotron;
 
-import java.util.ArrayList;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -53,6 +52,7 @@ public class UfoTron extends BasicGame
     public void init(GameContainer container) throws SlickException
     {
 		currentState = new AStateMenu();
+		container.getInput().addKeyListener(new KeyboardInput());
     }
  
     @Override
@@ -73,6 +73,7 @@ public class UfoTron extends BasicGame
 	public static int GetWidth() {return width;}
 	
 	public static void SetCurrentState(ApplicationState newState) { currentState = newState; }
+	public static ApplicationState GetCurrentState() { return currentState; }
 	
 	
 	public static ServerSocket GetServerSocket() {return serverSocket;}
@@ -91,4 +92,8 @@ public class UfoTron extends BasicGame
 		else return -1;
 	}
 	public static void Write(int data) throws IOException {outputBuffer.write(data);};
+
+
+	
+
 }
