@@ -12,15 +12,34 @@ public class AStateGame extends ApplicationState
 	private static ArrayList<Player> players = new ArrayList<>();
 	
 	int numberOfPlayers;
-	int myPlayer;
+	int myPlayerID;
+	
 	
 	@Override
 	public void Init()
 	{	
 		players.clear();
+		numberOfPlayers = 1;
 		
-		numberOfPlayers = 4;
-		myPlayer = 0; //TODO: Get this information via server connection
+		try
+		{
+			if(UfoTron.GetServerSocket() != null)
+			{
+				myPlayerID = 0;
+				UfoTron.Write(numberOfPlayers++);
+				UfoTron.Write(numberOfPlayers);
+			}
+			else
+			{
+				myPlayerID = UfoTron.Read();
+				numberOfPlayers = UfoTron.Read();
+			}
+		}
+		catch(Exception e) { e.printStackTrace(); }
+		System.out.println("My ID " + myPlayerID);
+		
+		//numberOfPlayers = 4;
+		//myPlayerID = 0; //TODO: Get this information via server connection
 		
 		System.out.println("Game");
 		
@@ -36,8 +55,8 @@ public class AStateGame extends ApplicationState
 			players.add(new Player(i, initialPosition[i], initialSize, initialVelocity[i]));
 		}
 		
-		commands.put(Input.KEY_LEFT, new TurnLeft(myPlayer));
-		commands.put(Input.KEY_RIGHT, new TurnRight(myPlayer));
+		commands.put(Input.KEY_LEFT, new TurnLeft(myPlayerID));
+		commands.put(Input.KEY_RIGHT, new TurnRight(myPlayerID));
 	}
 	
 	@Override
