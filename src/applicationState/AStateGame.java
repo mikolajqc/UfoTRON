@@ -6,14 +6,16 @@ import ufotron.Player;
 
 public class AStateGame extends ApplicationState
 {
-	private static ArrayList<Player> players = new ArrayList<Player>();	
+	private static ArrayList<Player> players = new ArrayList<>();	
 	
+	@Override
 	public void Init()
 	{
 		System.out.println("Game");
 		players.add(new Player(0));
 	}
 	
+	@Override
 	public void Update(Input input)
 	{
 		for(int i = 0; i < players.size(); ++i)
@@ -21,6 +23,7 @@ public class AStateGame extends ApplicationState
 		
 	}
 	
+	@Override
 	public void Render()
 	{
 		for(int i = 0; i < players.size(); ++i)

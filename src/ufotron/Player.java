@@ -2,8 +2,6 @@ package ufotron;
 
 import applicationState.AStateGame;
 import applicationState.AStateMenu;
-import java.sql.Time;
-import org.lwjgl.util.vector.Vector;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
