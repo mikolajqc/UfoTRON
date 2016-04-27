@@ -17,7 +17,7 @@ import ufotron.*;
 public class AStateJoinGame extends ApplicationState
 {
 	public static final int PORT=50007;
-	public static final String HOST = "127.0.0.1";
+	public static final String HOST = "192.168.0.108";
 	
 	@Override
 	public void Init()
@@ -37,6 +37,9 @@ public class AStateJoinGame extends ApplicationState
 		{
 			System.out.println("Host not found. Single game started.");
 		}
+		
+		
+		
 		catch (IOException ex)
 		{
 			System.out.println("Error with connection to the host");
