@@ -1,7 +1,6 @@
 package ufotron;
 
 import applicationState.AStateGame;
-import applicationState.AStateMenu;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -24,7 +23,7 @@ public class Player
 			
 			position = new Vector2f(320,240);
 			size = new Vector2f(30, 30);
-			velocity = new Vector2f(290.0F,0);
+			velocity = new Vector2f(0,-100);
 			sprite = new Image("crate.png");
 		}
 		catch(SlickException e)
@@ -36,20 +35,7 @@ public class Player
 	public void Update(Input input)
 	{
 		if(position.x < 0 || position.x + size.x > UfoTron.GetWidth() || position.y < 0 || position.y + size.y > UfoTron.GetHeight())
-		{
-			System.out.println(Timer.getTotalTime());
 			AStateGame.GetPlayers().remove(this);
-			UfoTron.SetCurrentState(new AStateMenu());
-		}
-		
-		if(input.isKeyPressed(Input.KEY_RIGHT))
-		{
-			velocity = new Vector2f(-velocity.y, velocity.x);
-		}
-		else if(input.isKeyPressed(Input.KEY_LEFT))
-		{
-			velocity = new Vector2f(velocity.y, -velocity.x);
-		}
 		
 		position.x += velocity.x * Timer.getDeltaTime();
 		position.y += velocity.y * Timer.getDeltaTime();
@@ -59,4 +45,22 @@ public class Player
 	{
 		sprite.draw(position.x, position.y, size.x, size.y);
 	}
+	
+	public void TurnLeft()
+	{
+		velocity = new Vector2f(velocity.y, -velocity.x);
+		sprite.setCenterOfRotation(size.x/2, size.y/2);
+		sprite.rotate(-90);
+	}
+	
+	public void TurnRight()
+	{
+		velocity = new Vector2f(-velocity.y, velocity.x);
+		sprite.setCenterOfRotation(size.x/2, size.y/2);
+		sprite.rotate(90);
+	}
+	
+	public int GetPlayerID() {return playerID;}
+	public Vector2f GetPosition() {return position;}
+	public Vector2f GetVelocity() {return velocity;}	
 }
