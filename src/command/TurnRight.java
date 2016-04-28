@@ -13,12 +13,14 @@ public class TurnRight extends PlayerCommand
 	@Override
 	public void Execute()
 	{
-		//player.SetVelocity(new Vector2f(player.GetVelocity().y, -player.GetVelocity().x));
 		player.TurnRight();
 		
-		try {
+		try 
+		{
 			UfoTron.Write(2);
-		} catch (IOException ex) {
+		} 
+		catch (IOException ex) 
+		{
 			System.out.println("Not saved (1)");
 		}
 		

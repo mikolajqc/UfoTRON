@@ -39,9 +39,6 @@ public class AStateGame extends ApplicationState
 		catch(Exception e) { e.printStackTrace(); }
 		System.out.println("My ID " + myPlayerID);
 		
-		//numberOfPlayers = 4;
-		//myPlayerID = 0; //TODO: Get this information via server connection
-		
 		System.out.println("Game");
 		
 		Vector2f initialSize = new Vector2f(UfoTron.GetHeight()/20, UfoTron.GetHeight()/20);
@@ -64,7 +61,7 @@ public class AStateGame extends ApplicationState
 	public void Update(Input input)
 	{
 		if(players.isEmpty())
-			UfoTron.SetCurrentState(new AStateMenu());
+			UfoTron.SetCurrentState(new AStateDisconnect());
 		
 		for(Integer currentEvent = eventQueue.poll(); currentEvent != null; currentEvent = eventQueue.poll())
 			HandleInput(currentEvent);
