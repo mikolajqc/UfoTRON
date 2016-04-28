@@ -29,8 +29,8 @@ public class AStateGame extends ApplicationState
 			if(UfoTron.GetServerSocket() != null)
 			{
 				myPlayerID = 0;
-				UfoTron.Write(numberOfPlayers++);
-				UfoTron.Write(numberOfPlayers);
+				UfoTron.Write(new byte[]{(byte)numberOfPlayers++});
+				UfoTron.Write(new byte[]{(byte)numberOfPlayers});
 			}
 			else
 			{
@@ -48,7 +48,7 @@ public class AStateGame extends ApplicationState
 		  , new Vector2f(UfoTron.GetWidth()/2 - initialSize.x/2, UfoTron.GetHeight()/8 - initialSize.y/2)
 		  , new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)
 		  , new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()*7/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)};
-		Vector2f initialVelocity[] = {new Vector2f(0, -UfoTron.GetHeight()*3/4), new Vector2f(0, UfoTron.GetHeight()*3/4), new Vector2f(UfoTron.GetHeight()*3/4,0), new Vector2f(-UfoTron.GetHeight()*3/4, 0)};
+		Vector2f initialVelocity[] = {new Vector2f(0, -50/*-UfoTron.GetHeight()*3/4*/), new Vector2f(0, 50/*UfoTron.GetHeight()*3/4*/), new Vector2f(UfoTron.GetHeight()*3/4,0), new Vector2f(-UfoTron.GetHeight()*3/4, 0)};
 		
 		for(int i = 0; i < numberOfPlayers; ++i)
 		{
@@ -62,16 +62,22 @@ public class AStateGame extends ApplicationState
 	@Override
 	public void Update(GameContainer container)
 	{
-		boolean isAnyoneAlive = false;
-		for(int i = 0; i < numberOfPlayers; ++i)
-			if(players.get(i).GetIsAlive())
-				isAnyoneAlive = true;
-		if(!isAnyoneAlive)
+		if(IsGameOver())
 			UfoTron.SetCurrentState(new AStateDisconnect());
 		
 		for(Integer currentEvent = eventQueue.poll(); currentEvent != null; currentEvent = eventQueue.poll())
 			HandleInput(currentEvent);
 		
+		try
+		{
+			while(UfoTron.GetInputBuffer() != null && UfoTron.GetInputBuffer().available() > 0)
+				HandleOpponentsInput();
+		}
+		catch(IOException e)
+		{
+			System.out.println("Cannot read");
+		}
+			
 		for(int i = 0; i < players.size(); ++i)
 			players.get(i).Update(container.getInput());
 		
@@ -87,15 +93,49 @@ public class AStateGame extends ApplicationState
 	@Override
 	public void HandleInput(int keycode)
 	{
-		commands.get(keycode).Execute(players.get(myPlayerID));
+		commands.get(keycode).Execute(players.get(myPlayerID), myPlayerID);
 	}
 	
 	public int WaitForReading() throws IOException
 	{
 		int readValue = -1;
+		byte[] buffer = new byte[1];
 		while(readValue == -1)
-			readValue = UfoTron.Read();
-		return readValue;
+			readValue = UfoTron.Read(buffer);
+		return buffer[0];//readValue;
 	}
 
+	private void HandleOpponentsInput() throws IOException
+	{
+			byte[] buffer = new byte[2];
+			int readData = UfoTron.Read(buffer);
+			
+			if(readData >= 0)
+			{
+				System.out.println("Read - Player ID: " + buffer[0] + " Command: " + buffer[1]);
+				PlayerCommand currentCommand = new NullCommand();
+				
+				switch(buffer[1])
+				{
+				case 0:
+					currentCommand = new TurnLeft(); break;
+				case 1:
+					currentCommand = new TurnRight(); break;
+				default:
+					System.out.println("Wrong command index"); break;
+				}
+				currentCommand.Execute(players.get(buffer[0]), myPlayerID);
+			}
+	}
+	
+	
+	private boolean IsGameOver()
+	{
+		boolean isGameOver = true;
+		for(int i = 0; i < numberOfPlayers; ++i)
+			if(players.get(i).GetIsAlive())
+				isGameOver = false;
+		
+		return isGameOver;
+	}
 }

@@ -1,7 +1,5 @@
 package ufotron;
 
-import applicationState.AStateGame;
-import java.io.IOException;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -42,18 +40,6 @@ public class Player
 		
 		if(position.x < 0 || position.x + size.x > UfoTron.GetWidth() || position.y < 0 || position.y + size.y > UfoTron.GetHeight())
 			isAlive = false;
-		
-		try
-		{
-			int readData = UfoTron.Read();
-			
-			if(readData > 0)
-				System.out.println(readData);
-		}
-		catch(IOException e)
-		{
-			System.out.println("Cannot read");
-		}
 		
 		position.x += velocity.x * Timer.getDeltaTime();
 		position.y += velocity.y * Timer.getDeltaTime();

@@ -90,12 +90,15 @@ public class UfoTron extends BasicGame
 	public static void SetInputBuffer(DataInputStream source) {inputBuffer = source;}
 	public static void SetOutputBuffer(DataOutputStream source) {outputBuffer = source;}
 	
-	public static int Read() throws IOException {
+	public static int Read(byte[] buffer) throws IOException 
+	{	
+		if(inputBuffer == null)
+			return -1;
 		
-		if(inputBuffer.available() > 0) 
-			return inputBuffer.read();
+		if(inputBuffer.available() > 0)
+			return inputBuffer.read(buffer);
 		else return -1;
 	}
-	public static void Write(int data) throws IOException {outputBuffer.write(data);};
+	public static void Write(byte[] data) throws IOException {outputBuffer.write(data);};
 
 }
