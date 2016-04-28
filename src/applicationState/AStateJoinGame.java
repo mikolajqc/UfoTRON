@@ -14,7 +14,7 @@ public class AStateJoinGame extends ApplicationState
 {
 	public static final int PORT=50007;
 
-	public static final String HOST = "127.0.0.1";//"192.168.0.103";
+	public static final String HOST = "192.168.0.103";
 
 	
 	@Override

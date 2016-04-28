@@ -12,8 +12,6 @@ public class AStateHostGame extends ApplicationState
 	public static final int PORT=50007;
 	public static final String HOST = "127.0.0.1";
 	
-	int numberOfPlayers;
-	int myPlayerID;
 	
 	@Override
 	public void Init()// throws IOException
@@ -31,7 +29,7 @@ public class AStateHostGame extends ApplicationState
 			
 			UfoTron.SetInputBuffer(new DataInputStream(UfoTron.GetSocket().getInputStream()));
 			UfoTron.SetOutputBuffer(new DataOutputStream(UfoTron.GetSocket().getOutputStream()));
-		}
+		} 
 		catch (IOException ex)
 		{
 			System.out.println("Error: Client not found");

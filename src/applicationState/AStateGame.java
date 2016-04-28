@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Input;
 import ufotron.Player;
 import command.*;
+import java.io.IOException;
 import org.lwjgl.util.vector.Vector2f;
 import ufotron.UfoTron;
 
@@ -31,8 +32,8 @@ public class AStateGame extends ApplicationState
 			}
 			else
 			{
-				myPlayerID = UfoTron.Read();
-				numberOfPlayers = UfoTron.Read();
+				myPlayerID = WaitForReading();
+				numberOfPlayers = WaitForReading();
 			}
 		}
 		catch(Exception e) { e.printStackTrace(); }
@@ -87,5 +88,13 @@ public class AStateGame extends ApplicationState
 	}
 	
 	public static ArrayList<Player> GetPlayers() {return players;}
+	
+	public int WaitForReading() throws IOException
+	{
+		int readValue = -1;
+		while(readValue == -1)
+			readValue = UfoTron.Read();
+		return readValue;
+	}
 
 }
