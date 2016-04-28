@@ -7,7 +7,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import applicationState.*;
-//import connection.*;
 
 import java.io.*;
 import java.net.*;
@@ -62,13 +61,13 @@ public class UfoTron extends BasicGame
     {
 		Timer.updateTime();
 		
-		currentState.Update(container.getInput());
+		currentState.Update(container);
     }
  
 	@Override
     public void render(GameContainer container, Graphics g) throws SlickException
     {
-		currentState.Render();
+		currentState.Render(container, g);
     }
 	
 	public static int GetHeight() {return height;}

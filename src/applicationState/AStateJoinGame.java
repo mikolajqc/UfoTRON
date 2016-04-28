@@ -6,7 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.Socket;
-import org.newdawn.slick.Input;
+import org.newdawn.slick.GameContainer;
 
 import ufotron.*;
 
@@ -42,7 +42,7 @@ public class AStateJoinGame extends ApplicationState
 	}
 	
 	@Override
-	public void Update(Input input)
+	public void Update(GameContainer container)
 	{
 		UfoTron.SetCurrentState(new AStateGame());
 	}

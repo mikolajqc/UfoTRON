@@ -6,6 +6,8 @@ import ufotron.Player;
 import command.*;
 import java.io.IOException;
 import org.lwjgl.util.vector.Vector2f;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import ufotron.UfoTron;
 
 public class AStateGame extends ApplicationState
@@ -58,7 +60,7 @@ public class AStateGame extends ApplicationState
 	}
 	
 	@Override
-	public void Update(Input input)
+	public void Update(GameContainer container)
 	{
 		if(players.isEmpty())
 			UfoTron.SetCurrentState(new AStateDisconnect());
@@ -67,12 +69,12 @@ public class AStateGame extends ApplicationState
 			HandleInput(currentEvent);
 		
 		for(int i = 0; i < players.size(); ++i)
-			players.get(i).Update(input);
+			players.get(i).Update(container.getInput());
 		
 	}
 	
 	@Override
-	public void Render()
+	public void Render(GameContainer container, Graphics g)
 	{
 		for(int i = 0; i < players.size(); ++i)
 			players.get(i).Render();

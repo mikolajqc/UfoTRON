@@ -1,7 +1,7 @@
 package applicationState;
 
 import java.io.IOException;
-import org.newdawn.slick.Input;
+import org.newdawn.slick.GameContainer;
 import ufotron.UfoTron;
 
 public class AStateDisconnect extends ApplicationState
@@ -25,7 +25,7 @@ public class AStateDisconnect extends ApplicationState
 	}
 	
 	@Override
-	public void Update(Input input)
+	public void Update(GameContainer container)
 	{
 		UfoTron.SetCurrentState(new AStateMenu());
 	}

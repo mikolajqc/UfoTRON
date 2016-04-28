@@ -4,7 +4,8 @@ import command.PlayerCommand;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
-import org.newdawn.slick.Input;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 
 public abstract class ApplicationState
 {	
@@ -20,9 +21,9 @@ public abstract class ApplicationState
 	
 	public abstract void Init();
 	
-	public abstract void Update(Input input);
+	public abstract void Update(GameContainer container);
 	
-	public void Render() {}
+	public void Render(GameContainer container, Graphics g) {}
 	
 	public void HandleInput(int keycode){}
 	

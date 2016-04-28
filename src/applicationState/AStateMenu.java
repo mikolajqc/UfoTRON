@@ -1,9 +1,10 @@
 package applicationState;
 
-import org.newdawn.slick.Input;
 import ufotron.*;
 import gui.*;
 import org.lwjgl.util.vector.Vector2f;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 
 public class AStateMenu extends ApplicationState
 {
@@ -20,14 +21,14 @@ public class AStateMenu extends ApplicationState
 	}
 	
 	@Override
-	public void Update(Input input)
+	public void Update(GameContainer container)
 	{		
-		hostButton.Update(input);
-		joinButton.Update(input);
+		hostButton.Update(container.getInput());
+		joinButton.Update(container.getInput());
 	}
 	
 	@Override
-	public void Render()
+	public void Render(GameContainer container, Graphics g)
 	{
 		hostButton.Render();
 		joinButton.Render();
