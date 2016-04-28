@@ -10,6 +10,7 @@ import applicationState.*;
 
 import java.io.*;
 import java.net.*;
+import org.newdawn.slick.gui.TextField;
 
 public class UfoTron extends BasicGame
 {
@@ -54,7 +55,9 @@ public class UfoTron extends BasicGame
 		container.getInput().addKeyListener(new KeyboardInput());
 		container.setVSync(true);
 		container.setTargetFrameRate(60);
-    }
+		AStateMenu.iPServer = new TextField(container, container.getDefaultFont(), 40, 40, 200, 40);
+		AStateMenu.iPServer.setText("127.0.0.1");
+	}
  
     @Override
     public void update(GameContainer container, int delta) throws SlickException
@@ -94,8 +97,5 @@ public class UfoTron extends BasicGame
 		else return -1;
 	}
 	public static void Write(int data) throws IOException {outputBuffer.write(data);};
-
-
-	
 
 }

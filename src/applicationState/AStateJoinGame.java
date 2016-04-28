@@ -14,13 +14,17 @@ public class AStateJoinGame extends ApplicationState
 {
 	public static final int PORT=50007;
 
-	public static final String HOST = "127.0.0.1"; //"192.168.0.103";
+	public static String HOST;
 
 	
 	@Override
 	public void Init()
 	{
 		System.out.println("Join");
+		
+		HOST = AStateMenu.iPServer.getText();
+		
+		System.out.println("Searching: " + HOST);
 		
 		try 
 		{
