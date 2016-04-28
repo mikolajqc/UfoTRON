@@ -12,7 +12,7 @@ import ufotron.UfoTron;
 
 public class AStateGame extends ApplicationState
 {
-	private static ArrayList<Player> players = new ArrayList<>();
+	private ArrayList<Player> players;
 	
 	int numberOfPlayers;
 	int myPlayerID;
@@ -21,7 +21,7 @@ public class AStateGame extends ApplicationState
 	@Override
 	public void Init()
 	{	
-		players.clear();
+		players = new ArrayList<>();
 		numberOfPlayers = 1;
 		
 		try
@@ -55,14 +55,18 @@ public class AStateGame extends ApplicationState
 			players.add(new Player(i, initialPosition[i], initialSize, initialVelocity[i]));
 		}
 		
-		commands.put(Input.KEY_LEFT, new TurnLeft(myPlayerID));
-		commands.put(Input.KEY_RIGHT, new TurnRight(myPlayerID));
+		commands.put(Input.KEY_LEFT, new TurnLeft());
+		commands.put(Input.KEY_RIGHT, new TurnRight());
 	}
 	
 	@Override
 	public void Update(GameContainer container)
 	{
-		if(players.isEmpty())
+		boolean isAnyoneAlive = false;
+		for(int i = 0; i < numberOfPlayers; ++i)
+			if(players.get(i).GetIsAlive())
+				isAnyoneAlive = true;
+		if(!isAnyoneAlive)
 			UfoTron.SetCurrentState(new AStateDisconnect());
 		
 		for(Integer currentEvent = eventQueue.poll(); currentEvent != null; currentEvent = eventQueue.poll())
@@ -83,10 +87,8 @@ public class AStateGame extends ApplicationState
 	@Override
 	public void HandleInput(int keycode)
 	{
-		commands.get(keycode).Execute();
+		commands.get(keycode).Execute(players.get(myPlayerID));
 	}
-	
-	public static ArrayList<Player> GetPlayers() {return players;}
 	
 	public int WaitForReading() throws IOException
 	{

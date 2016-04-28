@@ -1,17 +1,12 @@
 package command;
 
 import java.io.IOException;
-import ufotron.UfoTron;
+import ufotron.*;
 
 public class TurnRight extends PlayerCommand
-{
-	public TurnRight(int playerID)
-	{
-		super(playerID);
-	}
-	
+{	
 	@Override
-	public void Execute()
+	public void Execute(Player player)
 	{
 		player.TurnRight();
 		

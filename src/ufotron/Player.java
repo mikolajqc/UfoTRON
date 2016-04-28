@@ -10,6 +10,7 @@ import org.newdawn.slick.SlickException;
 public class Player
 {
 	int playerID;
+	boolean isAlive;
 	Vector2f position;
 	Vector2f size;
 	Vector2f velocity;
@@ -20,6 +21,7 @@ public class Player
 	{
 		try
 		{
+			isAlive = true;
 			this.playerID = playerID;
 			
 			this.position = position;
@@ -35,8 +37,11 @@ public class Player
 	
 	public void Update(Input input)
 	{		
+		if(!isAlive)
+			return;
+		
 		if(position.x < 0 || position.x + size.x > UfoTron.GetWidth() || position.y < 0 || position.y + size.y > UfoTron.GetHeight())
-			AStateGame.GetPlayers().remove(this);
+			isAlive = false;
 		
 		try
 		{
@@ -56,11 +61,17 @@ public class Player
 	
 	public void Render()
 	{
+		if(!isAlive)
+			return;
+		
 		sprite.draw(position.x, position.y, size.x, size.y);
 	}
 	
 	public void TurnLeft()
 	{
+		if(!isAlive)
+			return;
+		
 		velocity = new Vector2f(velocity.y, -velocity.x);
 		sprite.setCenterOfRotation(size.x/2, size.y/2);
 		sprite.rotate(-90);
@@ -68,6 +79,9 @@ public class Player
 	
 	public void TurnRight()
 	{
+		if(!isAlive)
+			return;
+		
 		velocity = new Vector2f(-velocity.y, velocity.x);
 		sprite.setCenterOfRotation(size.x/2, size.y/2);
 		sprite.rotate(90);
@@ -75,5 +89,6 @@ public class Player
 	
 	public int GetPlayerID() {return playerID;}
 	public Vector2f GetPosition() {return position;}
-	public Vector2f GetVelocity() {return velocity;}	
+	public Vector2f GetVelocity() {return velocity;}
+	public boolean GetIsAlive() {return isAlive;}
 }

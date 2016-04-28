@@ -1,17 +1,13 @@
 package command;
 
 import ufotron.*;
-import applicationState.AStateGame;
 
 public abstract class PlayerCommand
 {
-	public PlayerCommand(int playerID)
+	public PlayerCommand()
 	{
-		assert(AStateGame.GetPlayers().size() > playerID);
-		player = AStateGame.GetPlayers().get(playerID);
 	}
 	
-	public abstract void Execute();
+	public abstract void Execute(Player player);
 	
-	Player player;
 }
