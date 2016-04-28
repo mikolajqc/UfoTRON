@@ -17,6 +17,13 @@ public class AStateDisconnect extends ApplicationState
 		if(UfoTron.GetSocket() != null) UfoTron.GetSocket().close();
 		if(UfoTron.GetInputBuffer() != null) UfoTron.GetInputBuffer().close();
 		if(UfoTron.GetOutputBuffer() != null) UfoTron.GetOutputBuffer().close();
+		
+		UfoTron.SetServerSocket(null);
+		UfoTron.SetSocket(null);
+		UfoTron.SetInputBuffer(null);
+		UfoTron.SetOutputBuffer(null);
+		
+		assert(UfoTron.GetInputBuffer() == null && UfoTron.GetOutputBuffer() == null && UfoTron.GetServerSocket() == null && UfoTron.GetSocket() == null);
 		}
 		catch(IOException e)
 		{
