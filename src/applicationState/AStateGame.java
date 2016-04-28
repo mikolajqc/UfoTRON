@@ -26,17 +26,27 @@ public class AStateGame extends ApplicationState
 		
 		try
 		{
-			if(UfoTron.GetServerSocket() != null)
+			if(UfoTron.isSingleGame != true)
 			{
-				myPlayerID = 0;
-				UfoTron.Write(new byte[]{(byte)numberOfPlayers++});
-				UfoTron.Write(new byte[]{(byte)numberOfPlayers});
+				if(UfoTron.GetServerSocket() != null)
+				{
+					myPlayerID = 0;
+					UfoTron.Write(new byte[]{(byte)numberOfPlayers++});
+					UfoTron.Write(new byte[]{(byte)numberOfPlayers});
+				}
+				else
+				{
+					System.out.println("Waiting for reading");
+					myPlayerID = WaitForReading();
+					numberOfPlayers = WaitForReading();
+				}
 			}
 			else
 			{
-				myPlayerID = WaitForReading();
-				numberOfPlayers = WaitForReading();
+				myPlayerID = 0;
+				numberOfPlayers = 1;
 			}
+			
 		}
 		catch(Exception e) { e.printStackTrace(); }
 		System.out.println("My ID " + myPlayerID);

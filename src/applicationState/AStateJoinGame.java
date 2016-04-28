@@ -22,6 +22,8 @@ public class AStateJoinGame extends ApplicationState
 	{
 		System.out.println("Join");
 		
+		UfoTron.isSingleGame = false;
+		
 		HOST = AStateMenu.iPServer.getText();
 		
 		System.out.println("Searching: " + HOST);
@@ -29,7 +31,7 @@ public class AStateJoinGame extends ApplicationState
 		try 
 		{
 			UfoTron.SetSocket(new Socket(HOST,PORT));
-			
+			System.out.println("asdasd");
 			UfoTron.SetInputBuffer(new DataInputStream(UfoTron.GetSocket().getInputStream()));
 			
 			UfoTron.SetOutputBuffer(new DataOutputStream(UfoTron.GetSocket().getOutputStream()));
@@ -38,10 +40,12 @@ public class AStateJoinGame extends ApplicationState
 		catch (ConnectException e)
 		{
 			System.out.println("Host not found. Single game started.");
+			UfoTron.isSingleGame = true;
 		}
 		catch (IOException ex)
 		{
 			System.out.println("Error with connection to the host");
+			UfoTron.isSingleGame = true;
 		}
 	}
 	

@@ -29,6 +29,8 @@ public class UfoTron extends BasicGame
 	
 	static ApplicationState currentState = null;
 	
+	public static boolean isSingleGame = false;
+	
     public UfoTron()
     {
 		super("UfoTron");

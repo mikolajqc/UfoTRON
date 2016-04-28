@@ -15,7 +15,7 @@ public class TurnLeft extends PlayerCommand
 			System.out.println("Sending - Player ID: " + myPlayerID + " Command: " + 0);
 			try 
 			{
-				UfoTron.Write(new byte[]{(byte)myPlayerID, (byte)availableCommands.TURN_LEFT.ordinal()});//1);
+				if(UfoTron.isSingleGame == false) UfoTron.Write(new byte[]{(byte)myPlayerID, (byte)availableCommands.TURN_LEFT.ordinal()});//1);
 			} 
 			catch (IOException ex)
 			{
