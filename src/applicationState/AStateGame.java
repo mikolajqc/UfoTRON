@@ -183,6 +183,8 @@ public class AStateGame extends ApplicationState
 		
 				if(CheckXColision(players.get(i), players.get(j)) && CheckYColision(players.get(i), players.get(j)) == true)
 				{
+					System.out.println("Collision");
+					
 					PlayerCommand currentCommand;
 				
 					currentCommand = new KillPlayer();
@@ -199,7 +201,6 @@ public class AStateGame extends ApplicationState
 		{
 			if(second.GetPosition().x - first.GetPosition().x < first.GetSize().x)
 			{
-				System.out.println("ColisionX");
 				return true;
 			}
 		}
@@ -207,7 +208,6 @@ public class AStateGame extends ApplicationState
 		{
 			if(first.GetPosition().x - second.GetPosition().x < second.GetSize().x)
 			{
-				System.out.println("ColisionX");
 				return true;
 			}
 		}
@@ -220,7 +220,6 @@ public class AStateGame extends ApplicationState
 		{
 			if(second.GetPosition().y - first.GetPosition().y < first.GetSize().y)
 			{
-				System.out.println("ColisionY");
 				return true;
 			}
 		}
@@ -228,7 +227,6 @@ public class AStateGame extends ApplicationState
 		{
 			if(first.GetPosition().y - second.GetPosition().y < second.GetSize().y)
 			{
-				System.out.println("ColisionY");
 				return true;
 			}
 		}
