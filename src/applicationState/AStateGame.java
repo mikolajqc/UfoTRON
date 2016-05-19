@@ -35,6 +35,7 @@ public class AStateGame extends ApplicationState
 		numberOfPlayers = 1;
 		walls = new ArrayList<>();
 		killMe = new KillPlayer();
+		
 		try
 		{
 			background = new Image("grid.png");
@@ -127,15 +128,10 @@ public class AStateGame extends ApplicationState
 		{
 			players.get(i).Update(container.getInput());
 
-			walls.get(i).get(walls.get(i).size()-1).x = players.get(i).GetPosition().x;
-			walls.get(i).get(walls.get(i).size()-1).y = players.get(i).GetPosition().y;
-			
-			for(int j = 0; j < walls.get(i).size(); ++j)
+			if(walls.get(i).size()-1 >= 0)
 			{
-				String tabs = "";
-				for(int h = 0; h < j; ++h)
-					tabs += "\t";
-				System.out.println(tabs + walls.get(i).get(j));
+				walls.get(i).get(walls.get(i).size()-1).x = players.get(i).GetPosition().x;
+				walls.get(i).get(walls.get(i).size()-1).y = players.get(i).GetPosition().y;
 			}
 		}
 		
@@ -149,10 +145,10 @@ public class AStateGame extends ApplicationState
 		{
 			if(!players.get(player).GetIsAlive())
 				continue;
+			
 			for(int playerWalls = 0; playerWalls < players.size(); ++playerWalls)
 			{
 				int size  = (playerWalls == player) ? walls.get(playerWalls).size() - 1 : walls.get(playerWalls).size();
-				System.out.println(size);
 				for(int wall = 0; wall < size-1; ++wall)
 				{
 					Vector2f playerBegin = walls.get(player).get(walls.get(player).size()-2);
@@ -161,9 +157,24 @@ public class AStateGame extends ApplicationState
 					Vector2f wallEnd = walls.get(playerWalls).get(wall+1);
 					if(SegmentItersection.DoIntersect(playerBegin, playerEnd, wallBegin, wallEnd))
 					{
-						System.err.println("Intersection - Player: " + player + " Wall of player: " + playerWalls + " wall: " + wall );
-						System.err.println(playerBegin + " " + playerEnd + " " + wallBegin + " " + wallEnd);
-						killMe.Execute(players.get(player), myPlayerID, this);
+						playerEnd.x -= players.get(player).GetVelocity().x*Timer.getDeltaTime();
+						playerEnd.y -= players.get(player).GetVelocity().y*Timer.getDeltaTime();
+						
+						
+						
+						ArrayList<Integer> deathList = new ArrayList<>();
+						if(!SegmentItersection.DoIntersect(playerBegin, playerEnd , wallBegin, wallEnd))
+						{
+							System.err.println("Intersection - Player: " + player + " Wall of player: " + playerWalls + " wall: " + wall );
+							System.err.println(playerBegin + " " + playerEnd + " " + wallBegin + " " + wallEnd);
+							deathList.add(player);
+							killMe.Execute(players.get(player), players.get(player).GetPlayerID(), this);
+						}
+						else
+						{
+							deathList.add(playerWalls);
+							killMe.Execute(players.get(playerWalls), players.get(playerWalls).GetPlayerID(), this);
+						}
 						break;
 					}
 				}

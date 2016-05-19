@@ -69,7 +69,6 @@ public class Player
 		
 		velocity = new Vector2f(velocity.y, -velocity.x);
 		sprite.setCenterOfRotation(size.x/2, size.y/2);
-		//sprite.setCenterOfRotation(0, 0);
 		sprite.rotate(-90);
 	}
 	
@@ -80,7 +79,6 @@ public class Player
 		
 		velocity = new Vector2f(-velocity.y, velocity.x);
 		sprite.setCenterOfRotation(size.x/2, size.y/2);
-		//sprite.setCenterOfRotation(0, 0);
 		sprite.rotate(90);
 	}
 	
