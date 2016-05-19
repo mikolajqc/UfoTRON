@@ -15,7 +15,7 @@ public class KillPlayer extends PlayerCommand
 			System.out.println("Sending - Player: " + myPlayerID + " Command: " + 2);
 			try 
 			{
-				if(UfoTron.isSingleGame == false) UfoTron.Write(new byte[]{(byte)myPlayerID, (byte)PlayerCommand.availableCommands.KILL_PLAYER.ordinal()});//1);
+				if(UfoTron.isSingleGame == false) UfoTron.Write(new byte[]{(byte)player.GetPlayerID(), (byte)PlayerCommand.availableCommands.KILL_PLAYER.ordinal()});//1);
 			} 
 			catch (IOException ex)
 			{
