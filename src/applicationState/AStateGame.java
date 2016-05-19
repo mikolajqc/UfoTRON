@@ -84,6 +84,7 @@ public class AStateGame extends ApplicationState
 		
 		commands.put(Input.KEY_LEFT, new TurnLeft());
 		commands.put(Input.KEY_RIGHT, new TurnRight());
+		commands.put(Input.KEY_ESCAPE, new KillPlayer());
 		
 		gameTime = 0;
 	}
