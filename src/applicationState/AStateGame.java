@@ -22,6 +22,7 @@ public class AStateGame extends ApplicationState
 	double gameTime;
 	
 	Image background;
+	Image particle;
 	
 	ArrayList< ArrayList< Vector2f > > walls;
 	
@@ -35,6 +36,7 @@ public class AStateGame extends ApplicationState
 		try
 		{
 			background = new Image("grid.png");
+			particle = new Image("particle.png");
 			if(UfoTron.isSingleGame != true)
 			{
 				if(UfoTron.GetServerSocket() != null)
@@ -84,6 +86,7 @@ public class AStateGame extends ApplicationState
 		{
 			players.add(new Player(i, initialPosition[i], initialSize, initialVelocity[i], this));
 			walls.add(new ArrayList<>());
+			walls.get(i).add(new Vector2f(initialPosition[i]));
 			walls.get(i).add(new Vector2f(initialPosition[i]));
 		}
 		
@@ -142,7 +145,24 @@ public class AStateGame extends ApplicationState
 	{
 		background.draw(0, 0, UfoTron.GetWidth(), UfoTron.GetHeight());
 		for(int i = 0; i < players.size(); ++i)
+		{
 			players.get(i).Render();
+			for(int j = 0; j < walls.get(i).size()-1; ++j)
+			{
+				particle.draw
+		        (
+				walls.get(i).get(j).x
+				, walls.get(i).get(j).y
+				, walls.get(i).get(j+1).x - walls.get(i).get(j).x + UfoTron.GetWidth()/100//> 0 ? walls.get(i).get(j+1).x - walls.get(i).get(j).x : 10
+				, walls.get(i).get(j+1).y - walls.get(i).get(j).y + UfoTron.GetHeight()/100//> 0 ? walls.get(i).get(j+1).y - walls.get(i).get(j).y : 10
+				);
+				
+				/*if(secondPosition.x == firtsPosition.x)
+					particle.draw(firtsPosition.x, firtsPosition.x, 10, secondPosition.y - firtsPosition.y);
+				else
+					particle.draw(firtsPosition.x, firtsPosition.x, secondPosition.x - firtsPosition.x, 10);*/
+			}
+		}
 	}
 	
 	@Override

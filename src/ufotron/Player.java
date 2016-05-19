@@ -59,7 +59,7 @@ public class Player
 		if(!isAlive)
 			return;
 		
-		sprite.draw(position.x, position.y, size.x, size.y);
+		//sprite.draw(position.x, position.y, size.x, size.y);
 	}
 	
 	public void TurnLeft()
@@ -69,6 +69,7 @@ public class Player
 		
 		velocity = new Vector2f(velocity.y, -velocity.x);
 		sprite.setCenterOfRotation(size.x/2, size.y/2);
+		//sprite.setCenterOfRotation(0, 0);
 		sprite.rotate(-90);
 	}
 	
@@ -79,6 +80,7 @@ public class Player
 		
 		velocity = new Vector2f(-velocity.y, velocity.x);
 		sprite.setCenterOfRotation(size.x/2, size.y/2);
+		//sprite.setCenterOfRotation(0, 0);
 		sprite.rotate(90);
 	}
 	
