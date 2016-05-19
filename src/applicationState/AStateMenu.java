@@ -15,7 +15,8 @@ public class AStateMenu extends ApplicationState
 {
 	private Button hostButton;
 	private Button joinButton;
-	
+	private Button creditsButton;
+	private Button exitButton;
 	private Image titleImage;
 	
 	public static TextField iPServer;
@@ -27,9 +28,14 @@ public class AStateMenu extends ApplicationState
 		try {
 			System.out.println("Menu");
 			UfoTron.isSingleGame = false;
-			hostButton = new Button("host_UfoTron_off.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.4), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.2), Void -> { UfoTron.SetCurrentState(new AStateHostGame());});
-			joinButton = new Button("join_UfoTron_off.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.8), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.2), Void -> { UfoTron.SetCurrentState(new AStateJoinGame());});
+			
+			hostButton = new Button("host_UfoTron_off.png","host_UfoTron_on.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.35), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.12), Void -> { UfoTron.SetCurrentState(new AStateHostGame());});
+			joinButton = new Button("join_UfoTron_off.png","join_UfoTron_on.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.50), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.12), Void -> { UfoTron.SetCurrentState(new AStateJoinGame());});
+			creditsButton = new Button("credits_UfoTron_off.png","credits_UfoTron_on.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.65), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.12), Void -> { UfoTron.SetCurrentState(new AStateCredits());});
+			exitButton = new Button("exit_UfoTron_off.png","exit_UfoTron_on.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.80), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.12), Void -> { UfoTron.SetCurrentState(new AStateExit());});
+
 			titleImage = new Image("title.png");
+			
 		} catch (SlickException ex) {
 			Logger.getLogger(AStateMenu.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -40,6 +46,8 @@ public class AStateMenu extends ApplicationState
 	{		
 		hostButton.Update(container.getInput());
 		joinButton.Update(container.getInput());
+		creditsButton.Update(container.getInput());
+		exitButton.Update(container.getInput());
 	}
 	
 	@Override
@@ -47,7 +55,12 @@ public class AStateMenu extends ApplicationState
 	{
 		hostButton.Render();
 		joinButton.Render();
-		titleImage.draw(0, 0, container.getWidth(), container.getHeight()*(float)0.4);
+		creditsButton.Render();
+		exitButton.Render();
+		
+		titleImage.draw(container.getWidth()*(float)0.05, container.getHeight()*(float)0.05, container.getWidth()*(float)0.9, container.getHeight()*(float)0.2);
+		
+	//	iPServer.setLocation((int)(UfoTron.GetWidth()*(float)0.5), 0);
 		iPServer.render(container, g);
 	}
 }

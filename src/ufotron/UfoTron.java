@@ -59,7 +59,7 @@ public class UfoTron extends BasicGame
 		container.getInput().addKeyListener(new KeyboardInput());
 		container.setVSync(true);
 		container.setTargetFrameRate(60);
-		AStateMenu.iPServer = new TextField(container, container.getDefaultFont(), 40, 40, 200, 40);
+		AStateMenu.iPServer = new TextField(container, container.getDefaultFont(), UfoTron.GetWidth()*390/600, UfoTron.GetHeight()*10/480, UfoTron.GetWidth()*200/600, UfoTron.GetHeight()*40/480);
 		AStateMenu.iPServer.setText("127.0.0.1");
 		Test();
 		

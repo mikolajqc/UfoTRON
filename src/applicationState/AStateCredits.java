@@ -26,7 +26,7 @@ public class AStateCredits extends ApplicationState
 		try {
 			System.out.println("Credits");
 
-			exitButton = new Button("exit_UfoTron_off.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.80), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.12), Void -> { UfoTron.SetCurrentState(new AStateMenu());});
+			exitButton = new Button("exit_UfoTron_off.png", "exit_UfoTron_on.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.80), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.12), Void -> { UfoTron.SetCurrentState(new AStateMenu());});
 
 			titleImage = new Image("title.png");
 			
