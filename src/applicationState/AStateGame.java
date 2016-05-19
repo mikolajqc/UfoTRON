@@ -80,10 +80,10 @@ public class AStateGame extends ApplicationState
 		};
 		Vector2f initialVelocity[] = 
 		{
-			new Vector2f(UfoTron.GetHeight()*3/4/10,0)
-		  , new Vector2f(-UfoTron.GetHeight()*3/4/10, 0)
-		  ,	new Vector2f(0, -UfoTron.GetHeight()*1/4/10)
-		  , new Vector2f(0, UfoTron.GetHeight()*1/4/10)
+			new Vector2f(UfoTron.GetHeight()*3/4,0)
+		  , new Vector2f(-UfoTron.GetHeight()*3/4, 0)
+		  ,	new Vector2f(0, -UfoTron.GetHeight()*1/4)
+		  , new Vector2f(0, UfoTron.GetHeight()*1/4)
 		};
 
 		
@@ -106,6 +106,7 @@ public class AStateGame extends ApplicationState
 	public void Update(GameContainer container)
 	{
 		gameTime += Timer.getDeltaTime();
+		container.setMouseGrabbed(true);
 		
 		if(IsGameOver())
 		{
@@ -113,7 +114,10 @@ public class AStateGame extends ApplicationState
 			
 			--UfoTron.rounds;
 			if(UfoTron.rounds <= 0)
+			{
 				UfoTron.SetCurrentState(new AStateDisconnect());
+				container.setMouseGrabbed(false);
+			}
 			else
 				UfoTron.SetCurrentState(new AStateGame());
 				
