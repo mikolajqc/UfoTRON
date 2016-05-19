@@ -15,8 +15,8 @@ import org.newdawn.slick.gui.TextField;
 
 public class UfoTron extends BasicGame
 {
-	private static int width = 640;
-	private static int height = 480;
+	private static int width = 1920;//640;
+	private static int height = 1080;//480;
 	private static boolean isFullscreen = false;
 
 ///Server
