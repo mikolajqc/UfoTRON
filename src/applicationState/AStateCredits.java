@@ -9,15 +9,14 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.gui.TextField;
+
 
 public class AStateCredits extends ApplicationState
 {
 
 	private Button exitButton;
 	private Image titleImage;
-	
-
+	private Image creditsImage;
 	
 	
 	@Override
@@ -26,8 +25,8 @@ public class AStateCredits extends ApplicationState
 		try {
 			System.out.println("Credits");
 
-			exitButton = new Button("exit_UfoTron_off.png", "exit_UfoTron_on.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.80), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.12), Void -> { UfoTron.SetCurrentState(new AStateMenu());});
-
+			exitButton = new Button("back_UfoTron_off.png", "back_UfoTron_on.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.80), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.12), Void -> { UfoTron.SetCurrentState(new AStateMenu());});
+			creditsImage = new Image("credits.png");
 			titleImage = new Image("title.png");
 			
 		} catch (SlickException ex) {
@@ -49,7 +48,7 @@ public class AStateCredits extends ApplicationState
 	public void Render(GameContainer container, Graphics g)
 	{
 		exitButton.Render();
-		
 		titleImage.draw(container.getWidth()*(float)0.05, container.getHeight()*(float)0.05, container.getWidth()*(float)0.9, container.getHeight()*(float)0.2);
+		creditsImage.draw(container.getWidth()*(float)0.05, container.getHeight()*(float)0.3, container.getWidth()*(float)0.9, container.getHeight()*(float)0.2);
 	}
 }
