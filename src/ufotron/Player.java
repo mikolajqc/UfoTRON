@@ -24,13 +24,13 @@ public class Player
 		{
 			isAlive = true;
 			this.playerID = playerID;
-			
 			this.position = position;
 			this.size = size;
 			this.velocity = velocity;
-			sprite = new Image("crate.png");
 			
 			killMe = new KillPlayer();
+			sprite = new Image("lightcycle.png");
+
 		}
 		catch(SlickException e)
 		{

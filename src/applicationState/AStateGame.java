@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import ufotron.UfoTron;
 
 public class AStateGame extends ApplicationState
@@ -16,6 +17,8 @@ public class AStateGame extends ApplicationState
 	
 	int numberOfPlayers;
 	int myPlayerID;
+	
+	Image background;
 	
 	
 	@Override
@@ -26,6 +29,7 @@ public class AStateGame extends ApplicationState
 		
 		try
 		{
+			background = new Image("grid.png");
 			if(UfoTron.isSingleGame != true)
 			{
 				if(UfoTron.GetServerSocket() != null)
@@ -53,12 +57,23 @@ public class AStateGame extends ApplicationState
 		
 		System.out.println("Game");
 		
-		Vector2f initialSize = new Vector2f(UfoTron.GetHeight()/20, UfoTron.GetHeight()/20);
-		Vector2f initialPosition[] = {new Vector2f(UfoTron.GetWidth()/2 - initialSize.x/2, UfoTron.GetHeight()*7/8 - initialSize.y/2)
+		Vector2f initialSize = new Vector2f(UfoTron.GetHeight()/10, UfoTron.GetHeight()/20);
+		Vector2f initialPosition[] = 
+		{
+			new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)
+		  , new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()*7/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)
+		  ,	new Vector2f(UfoTron.GetWidth()/2 - initialSize.x/2, UfoTron.GetHeight()*7/8 - initialSize.y/2)
 		  , new Vector2f(UfoTron.GetWidth()/2 - initialSize.x/2, UfoTron.GetHeight()/8 - initialSize.y/2)
-		  , new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)
-		  , new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()*7/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)};
-		Vector2f initialVelocity[] = {new Vector2f(0, -UfoTron.GetHeight()*1/4), new Vector2f(0, UfoTron.GetHeight()*1/4), new Vector2f(UfoTron.GetHeight()*3/4,0), new Vector2f(-UfoTron.GetHeight()*3/4, 0)};
+
+		};
+		Vector2f initialVelocity[] = 
+		{
+			new Vector2f(UfoTron.GetHeight()*3/4,0)
+		  , new Vector2f(-UfoTron.GetHeight()*3/4, 0)
+		  ,	new Vector2f(0, -UfoTron.GetHeight()*1/4)
+		  , new Vector2f(0, UfoTron.GetHeight()*1/4)
+		};
+
 		
 		for(int i = 0; i < numberOfPlayers; ++i)
 		{
@@ -97,6 +112,7 @@ public class AStateGame extends ApplicationState
 	@Override
 	public void Render(GameContainer container, Graphics g)
 	{
+		background.draw(0, 0, UfoTron.GetWidth(), UfoTron.GetHeight());
 		for(int i = 0; i < players.size(); ++i)
 			players.get(i).Render();
 	}
@@ -166,6 +182,7 @@ public class AStateGame extends ApplicationState
 				
 					currentCommand = new KillPlayer();
 					currentCommand.Execute(players.get(i), myPlayerID);
+					currentCommand.Execute(players.get(j), myPlayerID);
 				}
 			}
 		}
