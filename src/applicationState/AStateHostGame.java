@@ -29,6 +29,7 @@ public class AStateHostGame extends ApplicationState
 			
 			UfoTron.SetInputBuffer(new DataInputStream(UfoTron.GetSocket().getInputStream()));
 			UfoTron.SetOutputBuffer(new DataOutputStream(UfoTron.GetSocket().getOutputStream()));
+			UfoTron.rounds = Integer.parseInt(AStateMenu.rounds.getText());
 		} 
 		catch (IOException ex)
 		{
