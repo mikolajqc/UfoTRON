@@ -10,13 +10,14 @@ import applicationState.*;
 
 import java.io.*;
 import java.net.*;
+import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.gui.TextField;
 
 public class UfoTron extends BasicGame
 {
-	private static int width = 1920;//640;
-	private static int height = 1080;//480;
+	private static int width = 640;
+	private static int height = 480;
 	private static boolean isFullscreen = false;
 
 ///Server
@@ -60,8 +61,19 @@ public class UfoTron extends BasicGame
 		container.setTargetFrameRate(60);
 		AStateMenu.iPServer = new TextField(container, container.getDefaultFont(), 40, 40, 200, 40);
 		AStateMenu.iPServer.setText("127.0.0.1");
+		Test();
+		
+		
 	}
  
+	public void Test()
+	{
+		assert(!SegmentItersection.DoIntersect(new Vector2f(1, 1), new Vector2f(10, 1), new Vector2f(1, 2), new Vector2f(10, 2)));
+		assert(SegmentItersection.DoIntersect(new Vector2f(10, 0), new Vector2f(0, 10), new Vector2f(0, 0), new Vector2f(10, 10)));
+		assert(!SegmentItersection.DoIntersect(new Vector2f(-5, -5), new Vector2f(0, 0), new Vector2f(1, 1), new Vector2f(10, 10)));
+		
+	}
+	
     @Override
     public void update(GameContainer container, int delta) throws SlickException
     {
