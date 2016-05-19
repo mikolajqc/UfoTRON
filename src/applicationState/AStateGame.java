@@ -9,6 +9,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import ufotron.Timer;
 import ufotron.UfoTron;
 
 public class AStateGame extends ApplicationState
@@ -17,6 +18,7 @@ public class AStateGame extends ApplicationState
 	
 	int numberOfPlayers;
 	int myPlayerID;
+	double gameTime;
 	
 	Image background;
 	
@@ -82,13 +84,20 @@ public class AStateGame extends ApplicationState
 		
 		commands.put(Input.KEY_LEFT, new TurnLeft());
 		commands.put(Input.KEY_RIGHT, new TurnRight());
+		
+		gameTime = 0;
 	}
 	
 	@Override
 	public void Update(GameContainer container)
 	{
+		gameTime += Timer.getDeltaTime();
+		
 		if(IsGameOver())
+		{
+			System.err.println("Game Total time " + gameTime);
 			UfoTron.SetCurrentState(new AStateDisconnect());
+		}
 		
 		for(Integer currentEvent = eventQueue.poll(); currentEvent != null; currentEvent = eventQueue.poll())
 			HandleInput(currentEvent);
@@ -129,7 +138,7 @@ public class AStateGame extends ApplicationState
 		byte[] buffer = new byte[1];
 		while(readValue == -1)
 			readValue = UfoTron.Read(buffer);
-		return buffer[0];//readValue;
+		return buffer[0];
 	}
 
 	private void HandleOpponentsInput() throws IOException
