@@ -68,10 +68,10 @@ public class AStateGame extends ApplicationState
 		};
 		Vector2f initialVelocity[] = 
 		{
-			new Vector2f(UfoTron.GetHeight()*3/4,0)
-		  , new Vector2f(-UfoTron.GetHeight()*3/4, 0)
-		  ,	new Vector2f(0, -UfoTron.GetHeight()*1/4)
-		  , new Vector2f(0, UfoTron.GetHeight()*1/4)
+			new Vector2f(UfoTron.GetHeight()*3/4/10,0)
+		  , new Vector2f(-UfoTron.GetHeight()*3/4/10, 0)
+		  ,	new Vector2f(0, -UfoTron.GetHeight()*1/4/10)
+		  , new Vector2f(0, UfoTron.GetHeight()*1/4/10)
 		};
 
 		
