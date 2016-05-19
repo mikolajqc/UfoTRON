@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import ufotron.UfoTron;
 
 public class AStateGame extends ApplicationState
@@ -16,6 +17,8 @@ public class AStateGame extends ApplicationState
 	
 	int numberOfPlayers;
 	int myPlayerID;
+	
+	Image background;
 	
 	
 	@Override
@@ -26,6 +29,7 @@ public class AStateGame extends ApplicationState
 		
 		try
 		{
+			background = new Image("grid.png");
 			if(UfoTron.isSingleGame != true)
 			{
 				if(UfoTron.GetServerSocket() != null)
@@ -105,6 +109,7 @@ public class AStateGame extends ApplicationState
 	@Override
 	public void Render(GameContainer container, Graphics g)
 	{
+		background.draw(0, 0, UfoTron.GetWidth(), UfoTron.GetHeight());
 		for(int i = 0; i < players.size(); ++i)
 			players.get(i).Render();
 	}
