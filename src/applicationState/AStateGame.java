@@ -58,7 +58,7 @@ public class AStateGame extends ApplicationState
 		  , new Vector2f(UfoTron.GetWidth()/2 - initialSize.x/2, UfoTron.GetHeight()/8 - initialSize.y/2)
 		  , new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)
 		  , new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()*7/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)};
-		Vector2f initialVelocity[] = {new Vector2f(0, -50/*-UfoTron.GetHeight()*3/4*/), new Vector2f(0, 50/*UfoTron.GetHeight()*3/4*/), new Vector2f(UfoTron.GetHeight()*3/4,0), new Vector2f(-UfoTron.GetHeight()*3/4, 0)};
+		Vector2f initialVelocity[] = {new Vector2f(0, -UfoTron.GetHeight()*1/4), new Vector2f(0, UfoTron.GetHeight()*1/4), new Vector2f(UfoTron.GetHeight()*3/4,0), new Vector2f(-UfoTron.GetHeight()*3/4, 0)};
 		
 		for(int i = 0; i < numberOfPlayers; ++i)
 		{
@@ -91,6 +91,7 @@ public class AStateGame extends ApplicationState
 		for(int i = 0; i < players.size(); ++i)
 			players.get(i).Update(container.getInput());
 		
+		Colisions();
 	}
 	
 	@Override
@@ -131,6 +132,8 @@ public class AStateGame extends ApplicationState
 					currentCommand = new TurnLeft(); break;
 				case 1:
 					currentCommand = new TurnRight(); break;
+				case 2:
+					currentCommand = new KillPlayer(); break;
 				default:
 					System.out.println("Wrong command index"); break;
 				}
@@ -148,4 +151,66 @@ public class AStateGame extends ApplicationState
 		
 		return isGameOver;
 	}
+	
+	
+	private void Colisions()
+	{
+		for(int i = 0; i < numberOfPlayers-1; ++i)
+		{
+			for(int j = i+1; j< numberOfPlayers; ++j)
+			{
+		
+				if(CheckXColision(players.get(i), players.get(j)) && CheckYColision(players.get(i), players.get(j)) == true)
+				{
+					PlayerCommand currentCommand;
+				
+					currentCommand = new KillPlayer();
+					currentCommand.Execute(players.get(i), myPlayerID);
+				}
+			}
+		}
+	}
+	
+	private boolean CheckXColision(Player first, Player second)
+	{
+		if(first.GetPosition().x < second.GetPosition().x)
+		{
+			if(second.GetPosition().x - first.GetPosition().x < first.GetSize().x)
+			{
+				System.out.println("ColisionX");
+				return true;
+			}
+		}
+		else
+		{
+			if(first.GetPosition().x - second.GetPosition().x < second.GetSize().x)
+			{
+				System.out.println("ColisionX");
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean CheckYColision(Player first, Player second)
+	{
+		if(first.GetPosition().y < second.GetPosition().y)
+		{
+			if(second.GetPosition().y - first.GetPosition().y < first.GetSize().y)
+			{
+				System.out.println("ColisionY");
+				return true;
+			}
+		}
+		else
+		{
+			if(first.GetPosition().y - second.GetPosition().y < second.GetSize().y)
+			{
+				System.out.println("ColisionY");
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

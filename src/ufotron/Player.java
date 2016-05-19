@@ -1,5 +1,6 @@
 package ufotron;
 
+import command.KillPlayer;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -12,6 +13,8 @@ public class Player
 	Vector2f position;
 	Vector2f size;
 	Vector2f velocity;
+	
+	KillPlayer killMe;
 	
 	Image sprite;
 	
@@ -26,6 +29,8 @@ public class Player
 			this.size = size;
 			this.velocity = velocity;
 			sprite = new Image("crate.png");
+			
+			killMe = new KillPlayer();
 		}
 		catch(SlickException e)
 		{
@@ -39,7 +44,7 @@ public class Player
 			return;
 		
 		if(position.x < 0 || position.x + size.x > UfoTron.GetWidth() || position.y < 0 || position.y + size.y > UfoTron.GetHeight())
-			isAlive = false;
+			killMe.Execute(this, playerID);//isAlive = false;
 		
 		position.x += velocity.x * Timer.getDeltaTime();
 		position.y += velocity.y * Timer.getDeltaTime();
@@ -73,8 +78,15 @@ public class Player
 		sprite.rotate(90);
 	}
 	
+	public void Die()
+	{
+		isAlive = false;
+	}
+	
+	
 	public int GetPlayerID() {return playerID;}
 	public Vector2f GetPosition() {return position;}
 	public Vector2f GetVelocity() {return velocity;}
+	public Vector2f GetSize() {return size;};
 	public boolean GetIsAlive() {return isAlive;}
 }

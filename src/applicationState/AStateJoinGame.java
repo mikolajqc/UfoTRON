@@ -31,7 +31,6 @@ public class AStateJoinGame extends ApplicationState
 		try 
 		{
 			UfoTron.SetSocket(new Socket(HOST,PORT));
-			System.out.println("asdasd");
 			UfoTron.SetInputBuffer(new DataInputStream(UfoTron.GetSocket().getInputStream()));
 			
 			UfoTron.SetOutputBuffer(new DataOutputStream(UfoTron.GetSocket().getOutputStream()));

@@ -8,6 +8,7 @@ public abstract class PlayerCommand
 	{
 		TURN_LEFT,
 		TURN_RIGHT,
+		KILL_PLAYER,
 	}
 	
 	public PlayerCommand()
