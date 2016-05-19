@@ -19,7 +19,7 @@ public class AStateMenu extends ApplicationState
 	public void Init()
 	{
 		System.out.println("Menu");
-		
+		UfoTron.isSingleGame = false;
 		hostButton = new Button("button.png", new Vector2f(270, 190), new Vector2f(100, 100), Void -> { UfoTron.SetCurrentState(new AStateHostGame());});
 		joinButton = new Button("button.png", new Vector2f(270, 290), new Vector2f(100, 100), Void -> { UfoTron.SetCurrentState(new AStateJoinGame());});
 	

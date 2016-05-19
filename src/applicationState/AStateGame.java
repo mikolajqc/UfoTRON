@@ -12,6 +12,7 @@ import org.newdawn.slick.Image;
 import ufotron.Timer;
 import ufotron.UfoTron;
 
+
 public class AStateGame extends ApplicationState
 {
 	private ArrayList<Player> players;
@@ -191,10 +192,9 @@ public class AStateGame extends ApplicationState
 				if(!players.get(j).GetIsAlive())
 					continue;
 		
-				if(CheckXColision(players.get(i), players.get(j)) && CheckYColision(players.get(i), players.get(j)) == true)
+				if(CheckColision(players.get(i), players.get(j)))
 				{
 					System.out.println("Collision");
-					
 					PlayerCommand currentCommand;
 				
 					currentCommand = new KillPlayer();
@@ -205,37 +205,11 @@ public class AStateGame extends ApplicationState
 		}
 	}
 	
-	private boolean CheckXColision(Player first, Player second)
+	private boolean CheckColision(Player first, Player second)
 	{
-		if(first.GetPosition().x < second.GetPosition().x)
+		if(Math.abs(first.GetPosition().x + 1/2*(first.GetSize().x)  - second.GetPosition().x - 1/2*(second.GetSize().x)) < (first.GetSize().x + second.GetSize().x)/2)
 		{
-			if(second.GetPosition().x - first.GetPosition().x < first.GetSize().x)
-			{
-				return true;
-			}
-		}
-		else
-		{
-			if(first.GetPosition().x - second.GetPosition().x < second.GetSize().x)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	private boolean CheckYColision(Player first, Player second)
-	{
-		if(first.GetPosition().y < second.GetPosition().y)
-		{
-			if(second.GetPosition().y - first.GetPosition().y < first.GetSize().y)
-			{
-				return true;
-			}
-		}
-		else
-		{
-			if(first.GetPosition().y - second.GetPosition().y < second.GetSize().y)
+			if(Math.abs(first.GetPosition().y + 1/2*(first.GetSize().y)  - second.GetPosition().y - 1/2*(second.GetSize().y)) < (first.GetSize().y + second.GetSize().y)/2)
 			{
 				return true;
 			}
