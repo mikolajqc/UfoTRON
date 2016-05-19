@@ -160,19 +160,14 @@ public class AStateGame extends ApplicationState
 						playerEnd.x -= players.get(player).GetVelocity().x*Timer.getDeltaTime();
 						playerEnd.y -= players.get(player).GetVelocity().y*Timer.getDeltaTime();
 						
-						
-						
-						ArrayList<Integer> deathList = new ArrayList<>();
 						if(!SegmentItersection.DoIntersect(playerBegin, playerEnd , wallBegin, wallEnd))
 						{
 							System.err.println("Intersection - Player: " + player + " Wall of player: " + playerWalls + " wall: " + wall );
 							System.err.println(playerBegin + " " + playerEnd + " " + wallBegin + " " + wallEnd);
-							deathList.add(player);
 							killMe.Execute(players.get(player), players.get(player).GetPlayerID(), this);
 						}
 						else
 						{
-							deathList.add(playerWalls);
 							killMe.Execute(players.get(playerWalls), players.get(playerWalls).GetPlayerID(), this);
 						}
 						break;
