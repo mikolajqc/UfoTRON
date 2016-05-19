@@ -27,8 +27,8 @@ public class AStateMenu extends ApplicationState
 		try {
 			System.out.println("Menu");
 			UfoTron.isSingleGame = false;
-			hostButton = new Button("host_UfoTron_off.png", new Vector2f(270, 190), new Vector2f(100, 100), Void -> { UfoTron.SetCurrentState(new AStateHostGame());});
-			joinButton = new Button("join_UfoTron_off.png", new Vector2f(270, 290), new Vector2f(100, 100), Void -> { UfoTron.SetCurrentState(new AStateJoinGame());});
+			hostButton = new Button("host_UfoTron_off.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.4), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.2), Void -> { UfoTron.SetCurrentState(new AStateHostGame());});
+			joinButton = new Button("join_UfoTron_off.png", new Vector2f(UfoTron.GetWidth()*(float)0.25, UfoTron.GetHeight()*(float)0.8), new Vector2f(UfoTron.GetWidth()*(float)0.5, UfoTron.GetHeight()*(float)0.2), Void -> { UfoTron.SetCurrentState(new AStateJoinGame());});
 			titleImage = new Image("title.png");
 		} catch (SlickException ex) {
 			Logger.getLogger(AStateMenu.class.getName()).log(Level.SEVERE, null, ex);
