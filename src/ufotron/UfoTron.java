@@ -10,6 +10,7 @@ import applicationState.*;
 
 import java.io.*;
 import java.net.*;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.gui.TextField;
 
 public class UfoTron extends BasicGame
@@ -72,6 +73,7 @@ public class UfoTron extends BasicGame
 	@Override
     public void render(GameContainer container, Graphics g) throws SlickException
     {
+		g.setBackground(new Color(16, 16, 32));
 		currentState.Render(container, g);
     }
 	

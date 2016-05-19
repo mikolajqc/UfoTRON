@@ -53,12 +53,21 @@ public class AStateGame extends ApplicationState
 		
 		System.out.println("Game");
 		
-		Vector2f initialSize = new Vector2f(UfoTron.GetHeight()/20, UfoTron.GetHeight()/20);
-		Vector2f initialPosition[] = {new Vector2f(UfoTron.GetWidth()/2 - initialSize.x/2, UfoTron.GetHeight()*7/8 - initialSize.y/2)
+		Vector2f initialSize = new Vector2f(UfoTron.GetHeight()/10, UfoTron.GetHeight()/20);
+		Vector2f initialPosition[] = 
+		{
+			new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)
+		  , new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()*7/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)
+		  ,	new Vector2f(UfoTron.GetWidth()/2 - initialSize.x/2, UfoTron.GetHeight()*7/8 - initialSize.y/2)
 		  , new Vector2f(UfoTron.GetWidth()/2 - initialSize.x/2, UfoTron.GetHeight()/8 - initialSize.y/2)
-		  , new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)
-		  , new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()*7/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)};
-		Vector2f initialVelocity[] = {new Vector2f(0, -50/*-UfoTron.GetHeight()*3/4*/), new Vector2f(0, 50/*UfoTron.GetHeight()*3/4*/), new Vector2f(UfoTron.GetHeight()*3/4,0), new Vector2f(-UfoTron.GetHeight()*3/4, 0)};
+		};
+		Vector2f initialVelocity[] = 
+		{
+			new Vector2f(UfoTron.GetHeight()*3/4,0)
+		  , new Vector2f(-UfoTron.GetHeight()*3/4, 0)
+		  ,	new Vector2f(0, -UfoTron.GetHeight()*1/4)
+		  , new Vector2f(0, UfoTron.GetHeight()*1/4)
+		};
 		
 		for(int i = 0; i < numberOfPlayers; ++i)
 		{

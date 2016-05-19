@@ -25,7 +25,7 @@ public class Player
 			this.position = position;
 			this.size = size;
 			this.velocity = velocity;
-			sprite = new Image("crate.png");
+			sprite = new Image("lightcycle.png");
 		}
 		catch(SlickException e)
 		{
