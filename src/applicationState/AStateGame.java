@@ -188,8 +188,8 @@ public class AStateGame extends ApplicationState
 					PlayerCommand currentCommand;
 				
 					currentCommand = new KillPlayer();
-					currentCommand.Execute(players.get(i), myPlayerID);
-					currentCommand.Execute(players.get(j), myPlayerID);
+					currentCommand.Execute(players.get(i), players.get(i).GetPlayerID());
+					currentCommand.Execute(players.get(j), players.get(j).GetPlayerID());
 				}
 			}
 		}

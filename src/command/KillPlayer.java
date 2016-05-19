@@ -8,6 +8,9 @@ public class KillPlayer extends PlayerCommand
 	@Override
 	public void Execute(Player player, int myPlayerID)
 	{
+		if(!player.GetIsAlive())
+			return;
+		
 		player.Die();
 		
 		if(player.GetPlayerID() == myPlayerID)
