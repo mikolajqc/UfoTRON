@@ -68,9 +68,10 @@ public class UfoTron extends BasicGame
  
 	public void Test()
 	{
-		assert(!SegmentItersection.DoIntersect(new Vector2f(1, 1), new Vector2f(10, 1), new Vector2f(1, 2), new Vector2f(10, 2)));
-		assert(SegmentItersection.DoIntersect(new Vector2f(10, 0), new Vector2f(0, 10), new Vector2f(0, 0), new Vector2f(10, 10)));
-		assert(!SegmentItersection.DoIntersect(new Vector2f(-5, -5), new Vector2f(0, 0), new Vector2f(1, 1), new Vector2f(10, 10)));
+		System.err.println(SegmentItersection.DoIntersect(new Vector2f(1.01f, 1.01f), new Vector2f(10.01f, 1.0f), new Vector2f(1.0f, 2.01f), new Vector2f(10.01f, 2.01f)));
+		System.err.println(SegmentItersection.DoIntersect(new Vector2f(1, 1), new Vector2f(10, 1), new Vector2f(1, 2), new Vector2f(10, 2)));
+		System.err.println(SegmentItersection.DoIntersect(new Vector2f(10, 0), new Vector2f(0, 10), new Vector2f(0, 0), new Vector2f(10, 10)));
+		System.err.println(SegmentItersection.DoIntersect(new Vector2f(-5, -5), new Vector2f(0, 0), new Vector2f(1, 1), new Vector2f(10, 10)));
 		
 	}
 	

@@ -15,6 +15,8 @@ public class KillPlayer extends PlayerCommand
 		
 		player.Die();
 		currentState.GetWalls().get(player.GetPlayerID()).clear();
+		//currentState.GetWalls().get(player.GetPlayerID()).add(new Vector2f(player.GetPosition()));
+		currentState.GetWalls().get(player.GetPlayerID()).add(player.GetPosition());
 		currentState.GetWalls().get(player.GetPlayerID()).add(player.GetPosition());
 		
 		if(player.GetPlayerID() == myPlayerID)

@@ -9,6 +9,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import ufotron.SegmentItersection;
 import ufotron.Timer;
 import ufotron.UfoTron;
 
@@ -25,6 +26,7 @@ public class AStateGame extends ApplicationState
 	Image particle;
 	
 	ArrayList< ArrayList< Vector2f > > walls;
+	PlayerCommand killMe;
 	
 	@Override
 	public void Init()
@@ -32,7 +34,7 @@ public class AStateGame extends ApplicationState
 		players = new ArrayList<>();
 		numberOfPlayers = 1;
 		walls = new ArrayList<>();
-		
+		killMe = new KillPlayer();
 		try
 		{
 			background = new Image("grid.png");
@@ -137,7 +139,36 @@ public class AStateGame extends ApplicationState
 			}
 		}
 		
-		Colisions();
+		//Colisions();
+		WallCollisions();
+	}
+	
+	public void WallCollisions()
+	{
+		for(int player = 0; player < players.size(); ++player)
+		{
+			if(!players.get(player).GetIsAlive())
+				continue;
+			for(int playerWalls = 0; playerWalls < players.size(); ++playerWalls)
+			{
+				int size  = (playerWalls == player) ? walls.get(playerWalls).size() - 1 : walls.get(playerWalls).size();
+				System.out.println(size);
+				for(int wall = 0; wall < size-1; ++wall)
+				{
+					Vector2f playerBegin = walls.get(player).get(walls.get(player).size()-2);
+					Vector2f playerEnd = walls.get(player).get(walls.get(player).size()-1);
+					Vector2f wallBegin = walls.get(playerWalls).get(wall);
+					Vector2f wallEnd = walls.get(playerWalls).get(wall+1);
+					if(SegmentItersection.DoIntersect(playerBegin, playerEnd, wallBegin, wallEnd))
+					{
+						System.err.println("Intersection - Player: " + player + " Wall of player: " + playerWalls + " wall: " + wall );
+						System.err.println(playerBegin + " " + playerEnd + " " + wallBegin + " " + wallEnd);
+						killMe.Execute(players.get(player), myPlayerID, this);
+						break;
+					}
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -156,11 +187,6 @@ public class AStateGame extends ApplicationState
 				, walls.get(i).get(j+1).x - walls.get(i).get(j).x + UfoTron.GetWidth()/100//> 0 ? walls.get(i).get(j+1).x - walls.get(i).get(j).x : 10
 				, walls.get(i).get(j+1).y - walls.get(i).get(j).y + UfoTron.GetHeight()/100//> 0 ? walls.get(i).get(j+1).y - walls.get(i).get(j).y : 10
 				);
-				
-				/*if(secondPosition.x == firtsPosition.x)
-					particle.draw(firtsPosition.x, firtsPosition.x, 10, secondPosition.y - firtsPosition.y);
-				else
-					particle.draw(firtsPosition.x, firtsPosition.x, secondPosition.x - firtsPosition.x, 10);*/
 			}
 		}
 	}
