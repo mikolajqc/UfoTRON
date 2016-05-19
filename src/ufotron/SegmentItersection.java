@@ -11,7 +11,7 @@ public class SegmentItersection
 	
 	public static boolean IsOnSegment(Vector2f begin, Vector2f end, Vector2f point)
 	{
-		return (Math.min(begin.x, end.x) <= point.x && point.x <= Math.max(begin.x, end.x));
+		return (Math.min(begin.x, end.x) < point.x && point.x < Math.max(begin.x, end.x));
 	}
 	
 	public static boolean DoIntersect(Vector2f p1, Vector2f p2, Vector2f p3, Vector2f p4)
