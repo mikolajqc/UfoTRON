@@ -1,17 +1,21 @@
 package command;
 
+import applicationState.AStateGame;
 import java.io.IOException;
+import org.lwjgl.util.vector.Vector2f;
 import ufotron.*;
 
 public class KillPlayer extends PlayerCommand
 {	
 	@Override
-	public void Execute(Player player, int myPlayerID)
+	public void Execute(Player player, int myPlayerID, AStateGame currentState)
 	{
 		if(!player.GetIsAlive())
 			return;
 		
 		player.Die();
+		currentState.GetWalls().get(player.GetPlayerID()).clear();
+		currentState.GetWalls().get(player.GetPlayerID()).add(player.GetPosition());
 		
 		if(player.GetPlayerID() == myPlayerID)
 		{

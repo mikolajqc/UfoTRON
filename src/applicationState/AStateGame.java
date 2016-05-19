@@ -22,12 +22,14 @@ public class AStateGame extends ApplicationState
 	
 	Image background;
 	
+	ArrayList< ArrayList< Vector2f > > walls;
 	
 	@Override
 	public void Init()
 	{	
 		players = new ArrayList<>();
 		numberOfPlayers = 1;
+		walls = new ArrayList<>();
 		
 		try
 		{
@@ -79,7 +81,9 @@ public class AStateGame extends ApplicationState
 		
 		for(int i = 0; i < numberOfPlayers; ++i)
 		{
-			players.add(new Player(i, initialPosition[i], initialSize, initialVelocity[i]));
+			players.add(new Player(i, initialPosition[i], initialSize, initialVelocity[i], this));
+			walls.add(new ArrayList<>());
+			walls.get(i).add(new Vector2f(initialPosition[i]));
 		}
 		
 		commands.put(Input.KEY_LEFT, new TurnLeft());
@@ -114,7 +118,20 @@ public class AStateGame extends ApplicationState
 		}
 			
 		for(int i = 0; i < players.size(); ++i)
+		{
 			players.get(i).Update(container.getInput());
+
+			walls.get(i).get(walls.get(i).size()-1).x = players.get(i).GetPosition().x;
+			walls.get(i).get(walls.get(i).size()-1).y = players.get(i).GetPosition().y;
+			
+			for(int j = 0; j < walls.get(i).size(); ++j)
+			{
+				String tabs = "";
+				for(int h = 0; h < j; ++h)
+					tabs += "\t";
+				System.out.println(tabs + walls.get(i).get(j));
+			}
+		}
 		
 		Colisions();
 	}
@@ -130,7 +147,7 @@ public class AStateGame extends ApplicationState
 	@Override
 	public void HandleInput(int keycode)
 	{
-		commands.get(keycode).Execute(players.get(myPlayerID), myPlayerID);
+		commands.get(keycode).Execute(players.get(myPlayerID), myPlayerID, this);
 	}
 	
 	public int WaitForReading() throws IOException
@@ -163,7 +180,7 @@ public class AStateGame extends ApplicationState
 				default:
 					System.out.println("Wrong command index"); break;
 				}
-				currentCommand.Execute(players.get(buffer[0]), myPlayerID);
+				currentCommand.Execute(players.get(buffer[0]), myPlayerID, this);
 			}
 	}
 	
@@ -198,8 +215,8 @@ public class AStateGame extends ApplicationState
 					PlayerCommand currentCommand;
 				
 					currentCommand = new KillPlayer();
-					currentCommand.Execute(players.get(i), players.get(i).GetPlayerID());
-					currentCommand.Execute(players.get(j), players.get(j).GetPlayerID());
+					currentCommand.Execute(players.get(i), players.get(i).GetPlayerID(), this);
+					currentCommand.Execute(players.get(j), players.get(j).GetPlayerID(), this);
 				}
 			}
 		}
@@ -243,4 +260,6 @@ public class AStateGame extends ApplicationState
 		return false;
 	}
 	
+	
+	public ArrayList< ArrayList< Vector2f > > GetWalls() { return walls; }
 }
