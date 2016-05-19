@@ -1,5 +1,6 @@
 package ufotron;
 
+import applicationState.AStateGame;
 import command.KillPlayer;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
@@ -18,7 +19,9 @@ public class Player
 	
 	Image sprite;
 	
-	public Player(int playerID, Vector2f position, Vector2f size, Vector2f velocity)
+	AStateGame currentState;
+	
+	public Player(int playerID, Vector2f position, Vector2f size, Vector2f velocity, AStateGame currentState)
 	{
 		try
 		{
@@ -27,6 +30,7 @@ public class Player
 			this.position = position;
 			this.size = size;
 			this.velocity = velocity;
+			this.currentState = currentState;
 			
 			killMe = new KillPlayer();
 			sprite = new Image("lightcycle.png");
@@ -44,7 +48,7 @@ public class Player
 			return;
 		
 		if(position.x < 0 || position.x + size.x > UfoTron.GetWidth() || position.y < 0 || position.y + size.y > UfoTron.GetHeight())
-			killMe.Execute(this, playerID);//isAlive = false;
+			killMe.Execute(this, playerID, currentState);//isAlive = false;
 		
 		position.x += velocity.x * Timer.getDeltaTime();
 		position.y += velocity.y * Timer.getDeltaTime();
