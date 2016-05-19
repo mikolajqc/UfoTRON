@@ -47,7 +47,7 @@ public class Player
 		if(!isAlive)
 			return;
 		
-		if(position.x < 0 || position.x + size.x > UfoTron.GetWidth() || position.y < 0 || position.y + size.y > UfoTron.GetHeight())
+		if(position.x < 0 || position.x + 10 > UfoTron.GetWidth() || position.y < 0 || position.y + 10 > UfoTron.GetHeight())
 			killMe.Execute(this, playerID, currentState);//isAlive = false;
 		
 		position.x += velocity.x * Timer.getDeltaTime();
