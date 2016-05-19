@@ -173,8 +173,13 @@ public class AStateGame extends ApplicationState
 	{
 		for(int i = 0; i < numberOfPlayers-1; ++i)
 		{
+			if(!players.get(i).GetIsAlive())
+				continue;
+			
 			for(int j = i+1; j< numberOfPlayers; ++j)
 			{
+				if(!players.get(j).GetIsAlive())
+					continue;
 		
 				if(CheckXColision(players.get(i), players.get(j)) && CheckYColision(players.get(i), players.get(j)) == true)
 				{
