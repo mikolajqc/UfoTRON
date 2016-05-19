@@ -20,6 +20,7 @@ public class AStateMenu extends ApplicationState
 	private Image titleImage;
 	
 	public static TextField iPServer;
+	public static TextField rounds;
 	
 	
 	@Override
@@ -64,7 +65,7 @@ public class AStateMenu extends ApplicationState
 		
 		titleImage.draw(container.getWidth()*(float)0.05, container.getHeight()*(float)0.05, container.getWidth()*(float)0.9, container.getHeight()*(float)0.2);
 		
-	//	iPServer.setLocation((int)(UfoTron.GetWidth()*(float)0.5), 0);
 		iPServer.render(container, g);
+		rounds.render(container, g);
 	}
 }

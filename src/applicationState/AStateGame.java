@@ -47,12 +47,14 @@ public class AStateGame extends ApplicationState
 					myPlayerID = 0;
 					UfoTron.Write(new byte[]{(byte)numberOfPlayers++});
 					UfoTron.Write(new byte[]{(byte)numberOfPlayers});
+					UfoTron.Write(new byte[]{(byte)UfoTron.rounds});
 				}
 				else
 				{
 					System.out.println("Waiting for reading");
 					myPlayerID = WaitForReading();
 					numberOfPlayers = WaitForReading();
+					UfoTron.rounds = WaitForReading();
 				}
 			}
 			else
@@ -108,7 +110,13 @@ public class AStateGame extends ApplicationState
 		if(IsGameOver())
 		{
 			System.err.println("Game Total time " + gameTime);
-			UfoTron.SetCurrentState(new AStateDisconnect());
+			
+			--UfoTron.rounds;
+			if(UfoTron.rounds <= 0)
+				UfoTron.SetCurrentState(new AStateDisconnect());
+			else
+				UfoTron.SetCurrentState(new AStateGame());
+				
 		}
 		
 		for(Integer currentEvent = eventQueue.poll(); currentEvent != null; currentEvent = eventQueue.poll())
