@@ -47,14 +47,14 @@ public class AStateGame extends ApplicationState
 					myPlayerID = 0;
 					UfoTron.Write(new byte[]{(byte)numberOfPlayers++});
 					UfoTron.Write(new byte[]{(byte)numberOfPlayers});
-					UfoTron.Write(new byte[]{(byte)UfoTron.rounds});
+					//UfoTron.Write(new byte[]{(byte)UfoTron.rounds});
 				}
 				else
 				{
 					System.out.println("Waiting for reading");
 					myPlayerID = WaitForReading();
 					numberOfPlayers = WaitForReading();
-					UfoTron.rounds = WaitForReading();
+					//UfoTron.rounds = WaitForReading();
 				}
 			}
 			else
@@ -80,8 +80,8 @@ public class AStateGame extends ApplicationState
 		};
 		Vector2f initialVelocity[] = 
 		{
-			new Vector2f(UfoTron.GetHeight()*3/4,0)
-		  , new Vector2f(-UfoTron.GetHeight()*3/4, 0)
+			new Vector2f(UfoTron.GetHeight()/2,0)
+		  , new Vector2f(-UfoTron.GetHeight()/2, 0)
 		  ,	new Vector2f(0, -UfoTron.GetHeight()*1/4)
 		  , new Vector2f(0, UfoTron.GetHeight()*1/4)
 		};
@@ -112,14 +112,8 @@ public class AStateGame extends ApplicationState
 		{
 			System.err.println("Game Total time " + gameTime);
 			
-			--UfoTron.rounds;
-			if(UfoTron.rounds <= 0)
-			{
-				UfoTron.SetCurrentState(new AStateDisconnect());
-				container.setMouseGrabbed(false);
-			}
-			else
-				UfoTron.SetCurrentState(new AStateGame());
+			UfoTron.SetCurrentState(new AStateDisconnect());
+			container.setMouseGrabbed(false);
 				
 		}
 		
@@ -163,6 +157,9 @@ public class AStateGame extends ApplicationState
 				int size  = (playerWalls == player) ? walls.get(playerWalls).size() - 1 : walls.get(playerWalls).size();
 				for(int wall = 0; wall < size-1; ++wall)
 				{
+					if(walls.get(player).size()-2 < 0)
+						break;
+					
 					Vector2f playerBegin = walls.get(player).get(walls.get(player).size()-2);
 					Vector2f playerEnd = walls.get(player).get(walls.get(player).size()-1);
 					Vector2f wallBegin = walls.get(playerWalls).get(wall);
