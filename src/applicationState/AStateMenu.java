@@ -44,10 +44,14 @@ public class AStateMenu extends ApplicationState
 	@Override
 	public void Update(GameContainer container)
 	{		
-		hostButton.Update(container.getInput());
-		joinButton.Update(container.getInput());
-		creditsButton.Update(container.getInput());
-		exitButton.Update(container.getInput());
+		try {
+			hostButton.Update(container.getInput());
+			joinButton.Update(container.getInput());
+			creditsButton.Update(container.getInput());
+			exitButton.Update(container.getInput());
+		} catch (SlickException ex) {
+			Logger.getLogger(AStateMenu.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 	
 	@Override

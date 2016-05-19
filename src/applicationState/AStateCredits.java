@@ -38,7 +38,11 @@ public class AStateCredits extends ApplicationState
 	@Override
 	public void Update(GameContainer container)
 	{		
-		exitButton.Update(container.getInput());
+		try {
+			exitButton.Update(container.getInput());
+		} catch (SlickException ex) {
+			Logger.getLogger(AStateCredits.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 	
 	@Override
