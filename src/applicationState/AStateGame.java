@@ -47,14 +47,12 @@ public class AStateGame extends ApplicationState
 					myPlayerID = 0;
 					UfoTron.Write(new byte[]{(byte)numberOfPlayers++});
 					UfoTron.Write(new byte[]{(byte)numberOfPlayers});
-					//UfoTron.Write(new byte[]{(byte)UfoTron.rounds});
 				}
 				else
 				{
 					System.out.println("Waiting for reading");
 					myPlayerID = WaitForReading();
 					numberOfPlayers = WaitForReading();
-					//UfoTron.rounds = WaitForReading();
 				}
 			}
 			else
@@ -141,7 +139,6 @@ public class AStateGame extends ApplicationState
 			}
 		}
 		
-		//Colisions();
 		WallCollisions();
 	}
 	
@@ -192,15 +189,14 @@ public class AStateGame extends ApplicationState
 		background.draw(0, 0, UfoTron.GetWidth(), UfoTron.GetHeight());
 		for(int i = 0; i < players.size(); ++i)
 		{
-			players.get(i).Render();
 			for(int j = 0; j < walls.get(i).size()-1; ++j)
 			{
 				particle.draw
 		        (
 				walls.get(i).get(j).x
 				, walls.get(i).get(j).y
-				, walls.get(i).get(j+1).x - walls.get(i).get(j).x + UfoTron.GetWidth()/100//> 0 ? walls.get(i).get(j+1).x - walls.get(i).get(j).x : 10
-				, walls.get(i).get(j+1).y - walls.get(i).get(j).y + UfoTron.GetHeight()/100//> 0 ? walls.get(i).get(j+1).y - walls.get(i).get(j).y : 10
+				, walls.get(i).get(j+1).x - walls.get(i).get(j).x + UfoTron.GetWidth()/100
+				, walls.get(i).get(j+1).y - walls.get(i).get(j).y + UfoTron.GetHeight()/100
 				);
 			}
 		}
@@ -256,45 +252,6 @@ public class AStateGame extends ApplicationState
 		
 		return isGameOver;
 	}
-	
-	
-	private void Colisions()
-	{
-		for(int i = 0; i < numberOfPlayers-1; ++i)
-		{
-			if(!players.get(i).GetIsAlive())
-				continue;
-			
-			for(int j = i+1; j< numberOfPlayers; ++j)
-			{
-				if(!players.get(j).GetIsAlive())
-					continue;
-		
-				if(CheckColision(players.get(i), players.get(j)))
-				{
-					System.out.println("Collision");
-					PlayerCommand currentCommand;
-				
-					currentCommand = new KillPlayer();
-					currentCommand.Execute(players.get(i), players.get(i).GetPlayerID(), this);
-					currentCommand.Execute(players.get(j), players.get(j).GetPlayerID(), this);
-				}
-			}
-		}
-	}
-	
-	private boolean CheckColision(Player first, Player second)
-	{
-		if(Math.abs(first.GetPosition().x + 1/2*(first.GetSize().x)  - second.GetPosition().x - 1/2*(second.GetSize().x)) < (first.GetSize().x + second.GetSize().x)/2)
-		{
-			if(Math.abs(first.GetPosition().y + 1/2*(first.GetSize().y)  - second.GetPosition().y - 1/2*(second.GetSize().y)) < (first.GetSize().y + second.GetSize().y)/2)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	
 	public ArrayList< ArrayList< Vector2f > > GetWalls() { return walls; }
 }

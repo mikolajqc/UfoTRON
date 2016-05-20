@@ -31,7 +31,6 @@ public class UfoTron extends BasicGame
 	static ApplicationState currentState = null;
 	
 	public static boolean isSingleGame = false;
-	public static int rounds = 0;
 	
     public UfoTron()
     {
@@ -61,8 +60,6 @@ public class UfoTron extends BasicGame
 		container.setTargetFrameRate(60);
 		AStateMenu.iPServer = new TextField(container, container.getDefaultFont(), UfoTron.GetWidth()*390/640, UfoTron.GetHeight()*10/480, UfoTron.GetWidth()*200/640, UfoTron.GetHeight()*40/480);
 		AStateMenu.iPServer.setText("127.0.0.1");
-		AStateMenu.rounds = new TextField(container, container.getDefaultFont(), UfoTron.GetWidth()*250/640, UfoTron.GetHeight()*10/480, UfoTron.GetWidth()*100/640, UfoTron.GetHeight()*40/480);
-		AStateMenu.rounds.setText("3");
 		container.setMouseCursor(new Image("lightcycle.png"), 0, 0);
 		Test();
 		
@@ -82,7 +79,6 @@ public class UfoTron extends BasicGame
     public void update(GameContainer container, int delta) throws SlickException
     {
 		Timer.updateTime();
-		
 		currentState.Update(container);
     }
  

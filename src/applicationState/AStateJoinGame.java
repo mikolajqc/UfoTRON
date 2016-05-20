@@ -40,7 +40,6 @@ public class AStateJoinGame extends ApplicationState
 		{
 			System.out.println("Host not found. Single game started.");
 			UfoTron.isSingleGame = true;
-			UfoTron.rounds = Integer.parseInt(AStateMenu.rounds.getText());
 		}
 		catch (IOException ex)
 		{
