@@ -162,14 +162,14 @@ public class AStateGame extends ApplicationState
 			//Choose set of walls with which player could collide
 			for(int playerWalls = 0; playerWalls < players.size(); ++playerWalls)
 			{
+				//If there are less then 1 wall do not consider this set of walls
+				if(walls.get(player).size()-2 < 0)
+					break;
 				//if this is player's own set of walls do not consider most recent wall - it is used as player collider
 				int size  = (playerWalls == player) ? walls.get(playerWalls).size() - 1 : walls.get(playerWalls).size();
 				//Choose exact wall
 				for(int wall = 0; wall < size-1; ++wall)
 				{
-					//If there are less then 2 walls do not consider this set of walls
-					if(walls.get(player).size()-2 < 0)
-						break;
 					
 					Vector2f playerBegin = walls.get(player).get(walls.get(player).size()-2);
 					Vector2f playerEnd = walls.get(player).get(walls.get(player).size()-1);
