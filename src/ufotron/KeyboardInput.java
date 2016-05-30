@@ -3,8 +3,16 @@ package ufotron;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 
+/**
+ * Custom key listener
+ */
 class KeyboardInput implements KeyListener
 {
+	/**
+	 * Is called when keyboard key was pressed
+	 * @param i key code
+	 * @param c character corresponding to press key
+	 */
 		@Override
 		public void keyPressed(int i, char c)
 		{
@@ -12,34 +20,54 @@ class KeyboardInput implements KeyListener
 				UfoTron.currentState.GetEvents().add(i);
 		}
 		
+		/**
+		 * Needed to implement KeyListener interface. 
+		 * @param i key code
+		 * @param c character corresponding to press key
+		 */
 		@Override
 		public void keyReleased(int i, char c)
 		{
-			
 		}
 
+		/**
+		 * Needed to implement KeyListener interface. 
+		 * @param i key code
+		 * @param c character corresponding to press key
+		 */
 		@Override
 		public void setInput(Input input)
 		{
-			//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 		}
 
+		/**
+		 * Needed to implement KeyListener interface. 
+		 * @param i key code
+		 * @param c character corresponding to press key
+		 */
 		@Override
 		public boolean isAcceptingInput()
 		{
-			//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 			return true;
 		}
 
+		/**
+		 * Needed to implement KeyListener interface. 
+		 * @param i key code
+		 * @param c character corresponding to press key
+		 */
 		@Override
 		public void inputEnded()
 		{
-			//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 		}
 
+		/**
+		 * Needed to implement KeyListener interface. 
+		 * @param i key code
+		 * @param c character corresponding to press key
+		 */
 		@Override
 		public void inputStarted()
 		{
-			//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 		}
 	}

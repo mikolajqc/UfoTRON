@@ -3,9 +3,14 @@ package applicationState;
 
 import org.newdawn.slick.GameContainer;
 
+/**
+ * Exit state
+ */
 public class AStateExit extends ApplicationState
 {
-	
+	/**
+	 * Exit application
+	 */
 	@Override
 	public void Init()
 	{

@@ -13,7 +13,9 @@ import ufotron.SegmentItersection;
 import ufotron.Timer;
 import ufotron.UfoTron;
 
-
+/**
+ * Game state/scene
+ */
 public class AStateGame extends ApplicationState
 {
 	private ArrayList<Player> players;
@@ -28,6 +30,9 @@ public class AStateGame extends ApplicationState
 	ArrayList< ArrayList< Vector2f > > walls;
 	PlayerCommand killMe;
 	
+	/**
+	 * Load wall sprites and set up players
+	 */
 	@Override
 	public void Init()
 	{	
@@ -142,18 +147,27 @@ public class AStateGame extends ApplicationState
 		WallCollisions();
 	}
 	
+	/**
+	 * Collision detection
+	 */
 	public void WallCollisions()
 	{
+		//Choose a player
 		for(int player = 0; player < players.size(); ++player)
 		{
+			//if this player is dead there is no point to check its collisions
 			if(!players.get(player).GetIsAlive())
 				continue;
 			
+			//Choose set of walls with which player could collide
 			for(int playerWalls = 0; playerWalls < players.size(); ++playerWalls)
 			{
+				//if this is player's own set of walls do not consider most recent wall - it is used as player collider
 				int size  = (playerWalls == player) ? walls.get(playerWalls).size() - 1 : walls.get(playerWalls).size();
+				//Choose exact wall
 				for(int wall = 0; wall < size-1; ++wall)
 				{
+					//If there are less then 2 walls do not consider this set of walls
 					if(walls.get(player).size()-2 < 0)
 						break;
 					
@@ -161,17 +175,20 @@ public class AStateGame extends ApplicationState
 					Vector2f playerEnd = walls.get(player).get(walls.get(player).size()-1);
 					Vector2f wallBegin = walls.get(playerWalls).get(wall);
 					Vector2f wallEnd = walls.get(playerWalls).get(wall+1);
+					//if player collided with another wall
 					if(SegmentItersection.DoIntersect(playerBegin, playerEnd, wallBegin, wallEnd))
 					{
 						playerEnd.x -= players.get(player).GetVelocity().x*Timer.getDeltaTime();
 						playerEnd.y -= players.get(player).GetVelocity().y*Timer.getDeltaTime();
 						
+						//if we revert this player move done during last frame will it still cause collision? If so kill this player
 						if(!SegmentItersection.DoIntersect(playerBegin, playerEnd , wallBegin, wallEnd))
 						{
 							System.err.println("Intersection - Player: " + player + " Wall of player: " + playerWalls + " wall: " + wall );
 							System.err.println(playerBegin + " " + playerEnd + " " + wallBegin + " " + wallEnd);
 							killMe.Execute(players.get(player), players.get(player).GetPlayerID(), this);
 						}
+						//otherwise kill player who owns the considered set of walls
 						else
 						{
 							killMe.Execute(players.get(playerWalls), players.get(playerWalls).GetPlayerID(), this);
@@ -202,12 +219,21 @@ public class AStateGame extends ApplicationState
 		}
 	}
 	
+	/**
+	 * Execute command specified by occurring event
+	 * @param keycode key code representing occurring event
+	 */
 	@Override
 	public void HandleInput(int keycode)
 	{
 		commands.get(keycode).Execute(players.get(myPlayerID), myPlayerID, this);
 	}
 	
+	/**
+	 * Reads data from input buffer without failure
+	 * @return read data
+	 * @throws IOException 
+	 */
 	public int WaitForReading() throws IOException
 	{
 		int readValue = -1;
@@ -217,6 +243,10 @@ public class AStateGame extends ApplicationState
 		return buffer[0];
 	}
 
+	/**
+	 * Handles input obtained from other players
+	 * @throws IOException 
+	 */
 	private void HandleOpponentsInput() throws IOException
 	{
 			byte[] buffer = new byte[2];
@@ -242,7 +272,10 @@ public class AStateGame extends ApplicationState
 			}
 	}
 	
-	
+	/**
+	 * Check if everyone is dead
+	 * @return is game over?
+	 */
 	private boolean IsGameOver()
 	{
 		boolean isGameOver = true;

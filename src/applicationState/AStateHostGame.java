@@ -7,12 +7,17 @@ import java.net.ServerSocket;
 import org.newdawn.slick.GameContainer;
 import ufotron.*;
 
+/**
+ * Host game state
+ */
 public class AStateHostGame extends ApplicationState
 {
 	public static final int PORT=50007;
 	public static final String HOST = "127.0.0.1";
 	
-	
+	/**
+	 * Wait for other player and set up input and output buffers
+	 */
 	@Override
 	public void Init()// throws IOException
 	{

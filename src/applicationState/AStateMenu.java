@@ -11,6 +11,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.TextField;
 
+/**
+ * Main menu state/scene
+ */
 public class AStateMenu extends ApplicationState
 {
 	private Button hostButton;
@@ -21,6 +24,9 @@ public class AStateMenu extends ApplicationState
 	
 	public static TextField iPServer;
 	
+	/**
+	 * Set up scene - load buttons
+	 */
 	@Override
 	public void Init()
 	{

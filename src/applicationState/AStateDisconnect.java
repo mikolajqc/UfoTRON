@@ -4,8 +4,14 @@ import java.io.IOException;
 import org.newdawn.slick.GameContainer;
 import ufotron.UfoTron;
 
+/**
+ * Disconnecting state
+ */
 public class AStateDisconnect extends ApplicationState
 {
+	/**
+	 * Close sockets and input/output buffers 
+	 */
 	@Override
 	public void Init()
 	{

@@ -5,6 +5,9 @@ import java.io.IOException;
 import org.lwjgl.util.vector.Vector2f;
 import ufotron.*;
 
+/**
+ * Command ordering player to turn right and sends itself to other peers
+ */
 public class TurnRight extends PlayerCommand
 {	
 	@Override
