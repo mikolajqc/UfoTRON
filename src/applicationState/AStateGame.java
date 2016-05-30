@@ -120,7 +120,8 @@ public class AStateGame extends ApplicationState
 				
 		}
 		
-		for(Integer currentEvent = eventQueue.poll(); currentEvent != null; currentEvent = eventQueue.poll())
+		Integer currentEvent = eventQueue.poll();
+		if(currentEvent != null)
 			HandleInput(currentEvent);
 		
 		try
