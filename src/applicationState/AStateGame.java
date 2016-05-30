@@ -23,7 +23,7 @@ public class AStateGame extends ApplicationState
 	double gameTime;
 	
 	Image background;
-	Image particle;
+	Image wallSprites[];
 	
 	ArrayList< ArrayList< Vector2f > > walls;
 	PlayerCommand killMe;
@@ -39,7 +39,7 @@ public class AStateGame extends ApplicationState
 		try
 		{
 			background = new Image("grid.png");
-			particle = new Image("particle.png");
+			wallSprites = new Image[]{new Image("wallSprite0.png"), new Image("wallSprite1.png")};
 			if(UfoTron.isSingleGame != true)
 			{
 				if(UfoTron.GetServerSocket() != null)
@@ -191,7 +191,7 @@ public class AStateGame extends ApplicationState
 		{
 			for(int j = 0; j < walls.get(i).size()-1; ++j)
 			{
-				particle.draw
+				wallSprites[i].draw
 		        (
 				walls.get(i).get(j).x
 				, walls.get(i).get(j).y

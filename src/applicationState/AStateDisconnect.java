@@ -18,6 +18,7 @@ public class AStateDisconnect extends ApplicationState
 		if(UfoTron.GetInputBuffer() != null) UfoTron.GetInputBuffer().close();
 		if(UfoTron.GetOutputBuffer() != null) UfoTron.GetOutputBuffer().close();
 		
+		
 		UfoTron.SetServerSocket(null);
 		UfoTron.SetSocket(null);
 		UfoTron.SetInputBuffer(null);
