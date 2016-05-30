@@ -13,18 +13,24 @@ public class AStateDisconnect extends ApplicationState
 		System.out.println("Server disconnecting");
 		try
 		{
-		if(UfoTron.GetServerSocket()!= null) UfoTron.GetServerSocket().close();
-		if(UfoTron.GetSocket() != null) UfoTron.GetSocket().close();
-		if(UfoTron.GetInputBuffer() != null) UfoTron.GetInputBuffer().close();
-		if(UfoTron.GetOutputBuffer() != null) UfoTron.GetOutputBuffer().close();
+			if(UfoTron.GetServerSocket()!= null) 
+				UfoTron.GetServerSocket().close();
+			if(UfoTron.GetSocket() != null) 
+				UfoTron.GetSocket().close();
+			if(UfoTron.GetInputBuffer() != null) 
+				UfoTron.GetInputBuffer().close();
+			if(UfoTron.GetOutputBuffer() != null) 
+			{
+				UfoTron.GetOutputBuffer().flush();
+				UfoTron.GetOutputBuffer().close();
+			}
 		
-		
-		UfoTron.SetServerSocket(null);
-		UfoTron.SetSocket(null);
-		UfoTron.SetInputBuffer(null);
-		UfoTron.SetOutputBuffer(null);
-		
-		assert(UfoTron.GetInputBuffer() == null && UfoTron.GetOutputBuffer() == null && UfoTron.GetServerSocket() == null && UfoTron.GetSocket() == null);
+			UfoTron.SetServerSocket(null);
+			UfoTron.SetSocket(null);
+			UfoTron.SetInputBuffer(null);
+			UfoTron.SetOutputBuffer(null);
+			
+			assert(UfoTron.GetInputBuffer() == null && UfoTron.GetOutputBuffer() == null && UfoTron.GetServerSocket() == null && UfoTron.GetSocket() == null);
 		}
 		catch(IOException e)
 		{
