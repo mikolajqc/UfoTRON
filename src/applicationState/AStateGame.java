@@ -77,16 +77,11 @@ public class AStateGame extends ApplicationState
 		{
 			new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)
 		  , new Vector2f((UfoTron.GetWidth() - UfoTron.GetHeight())/2 + UfoTron.GetHeight()*7/8 - initialSize.x/2, UfoTron.GetHeight()/2 - initialSize.y/2)
-		  ,	new Vector2f(UfoTron.GetWidth()/2 - initialSize.x/2, UfoTron.GetHeight()*7/8 - initialSize.y/2)
-		  , new Vector2f(UfoTron.GetWidth()/2 - initialSize.x/2, UfoTron.GetHeight()/8 - initialSize.y/2)
-
 		};
 		Vector2f initialVelocity[] = 
 		{
 			new Vector2f(UfoTron.GetHeight()/4,0)
 		  , new Vector2f(-UfoTron.GetHeight()/4, 0)
-		  ,	new Vector2f(0, -UfoTron.GetHeight()*1/4)
-		  , new Vector2f(0, UfoTron.GetHeight()*1/4)
 		};
 
 		
