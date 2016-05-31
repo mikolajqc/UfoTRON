@@ -151,6 +151,7 @@ public class UfoTron extends BasicGame
 	 */
 	public static void Write(byte[] data) throws IOException 
 	{
-		outputBuffer.write(data);
+		if(outputBuffer != null)
+			outputBuffer.write(data);
 	}
 }
