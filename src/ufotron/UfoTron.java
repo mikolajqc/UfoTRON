@@ -15,13 +15,16 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.gui.TextField;
 
+/**
+Main application class
+*/
+
 public class UfoTron extends BasicGame
 {
 	private static int width = 800;
 	private static int height = 640;
 	private static boolean isFullscreen = false;
 
-///Server
 	private static ServerSocket serverSocket = null;
 	private static Socket socket = null;
 	private static DataInputStream inputBuffer = null;
@@ -32,6 +35,9 @@ public class UfoTron extends BasicGame
 	
 	public static boolean isSingleGame = false;
 	
+	/**
+	Slick requires this initialization.
+	*/
     public UfoTron()
     {
 		super("UfoTron");
@@ -51,6 +57,10 @@ public class UfoTron extends BasicGame
         }
     }
  
+	/**
+	Init function provided by slick.
+	@param container main slick tool
+	*/
     @Override
     public void init(GameContainer container) throws SlickException
     {
@@ -66,6 +76,11 @@ public class UfoTron extends BasicGame
 		
 	}
  
+	/**
+	Few examples testing segment intersection
+	<p>
+	Should show: false, false, true, false
+	*/
 	public void Test()
 	{
 		System.err.println(SegmentItersection.DoIntersect(new Vector2f(1.01f, 1.01f), new Vector2f(10.01f, 1.0f), new Vector2f(1.0f, 2.01f), new Vector2f(10.01f, 2.01f)));
@@ -75,6 +90,11 @@ public class UfoTron extends BasicGame
 		
 	}
 	
+	/**
+	Update function provided by slick.
+	@param container main slick tool
+	@param delta amount of time passed since last update (in ms)
+	*/
     @Override
     public void update(GameContainer container, int delta) throws SlickException
     {
@@ -82,6 +102,11 @@ public class UfoTron extends BasicGame
 		currentState.Update(container);
     }
  
+	/**
+	Render function provided by slick.
+	@param container main slick tool
+	@param g object containing method used to render and display objects
+	*/
 	@Override
     public void render(GameContainer container, Graphics g) throws SlickException
     {
@@ -91,11 +116,8 @@ public class UfoTron extends BasicGame
 	
 	public static int GetHeight() {return height;}
 	public static int GetWidth() {return width;}
-	
 	public static void SetCurrentState(ApplicationState newState) { currentState = newState; }
 	public static ApplicationState GetCurrentState() { return currentState; }
-	
-	
 	public static ServerSocket GetServerSocket() {return serverSocket;}
 	public static Socket GetSocket() {return socket;}
 	public static DataInputStream GetInputBuffer() {return inputBuffer;}
@@ -106,6 +128,12 @@ public class UfoTron extends BasicGame
 	public static void SetInputBuffer(DataInputStream source) {inputBuffer = source;}
 	public static void SetOutputBuffer(DataOutputStream source) {outputBuffer = source;}
 	
+	/**
+	 * Read data from input buffer to local array
+	 * @param buffer local array which can be processed further
+	 * @return number of read bytes, -1 if failed to read
+	 * @throws IOException 
+	 */
 	public static int Read(byte[] buffer) throws IOException 
 	{	
 		if(inputBuffer == null)
@@ -115,6 +143,15 @@ public class UfoTron extends BasicGame
 			return inputBuffer.read(buffer);
 		else return -1;
 	}
-	public static void Write(byte[] data) throws IOException {outputBuffer.write(data);};
-
+	
+	/**
+	 * Writes data to output stream
+	 * @param data data we want to send to other peers
+	 * @throws IOException 
+	 */
+	public static void Write(byte[] data) throws IOException 
+	{
+		if(outputBuffer != null)
+			outputBuffer.write(data);
+	}
 }

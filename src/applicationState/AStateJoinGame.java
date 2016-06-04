@@ -1,6 +1,5 @@
 package applicationState;
 
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -10,13 +9,18 @@ import org.newdawn.slick.GameContainer;
 
 import ufotron.*;
 
+/**
+ * Join game/start single player game state/scene
+ */
 public class AStateJoinGame extends ApplicationState
 {
 	public static final int PORT=50007;
 
 	public static String HOST;
 
-	
+	/**
+	 * Connect with host and set up input and output buffers
+	 */
 	@Override
 	public void Init()
 	{

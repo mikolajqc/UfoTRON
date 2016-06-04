@@ -10,7 +10,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-
+/**
+ * Credits state/scene
+ */
 public class AStateCredits extends ApplicationState
 {
 
@@ -18,7 +20,9 @@ public class AStateCredits extends ApplicationState
 	private Image titleImage;
 	private Image creditsImage;
 	
-	
+	/**
+	 * Create credits
+	 */
 	@Override
 	public void Init()
 	{

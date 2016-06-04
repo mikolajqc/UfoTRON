@@ -4,6 +4,9 @@ import applicationState.AStateGame;
 import java.io.IOException;
 import ufotron.*;
 
+/**
+ * Command which kills player and sends itself to other peers
+ */
 public class KillPlayer extends PlayerCommand
 {	
 	@Override
